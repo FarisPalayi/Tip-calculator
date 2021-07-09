@@ -38,54 +38,56 @@
     </header>
     <main class="card">
       <section class="card__section card__section--left">
-        <label for="bill" class="card__section--left__bill-label">Bill</label>
+        <label for="bill" class="card__section__label card__section__label--bill">Bill</label>
         <input
           type="number"
           name="bill"
           id="bill"
           class="card__section--left__bill-input"
+          value="142.55"
         />
         <p class="card__section--left__tip-title">Select Tip %</p>
         <div class="card__section--left__btns-wrapper">
           <button class="card__section--left__btns-wrapper__btn">5%</button>
           <button class="card__section--left__btns-wrapper__btn">10%</button>
-          <button class="card__section--left__btns-wrapper__btn">15%</button>
+          <button class="card__section--left__btns-wrapper__btn card__section--left__btns-wrapper__btn--active">15%</button>
           <button class="card__section--left__btns-wrapper__btn">25%</button>
           <button class="card__section--left__btns-wrapper__btn">50%</button>
-          <button class="card__section--left__btns-wrapper__btn">Custom</button>
+          <button class="card__section--left__btns-wrapper__btn card__section--left__btns-wrapper__btn--custom">Custom</button>
         </div>
-        <label for="people" class="card__section--left__people-label"
-          >Number of People</label
-        >
+        <label for="people" class="card__section__label card__section__label-people">Number of People</label>
         <input
           type="number"
           name="people"
           id="people"
           class="card__section--left__people-input"
+          value="5"
         />
       </section>
       <section class="card__section card__section--right">
-        <!-- prettier-ignore -->
-        <div class="card__section--right__amt-container">
-          <div class="card__section--right__amt-container__left">
-            <p class="card__section--right__amt-container__left__title">Tip Amount</p>
-            <small class="card__section--right__amt-container__left__small">/ person</small>
+        <div>
+          <!-- prettier-ignore -->
+          <div class="card__section--right__amt-container">
+            <div class="card__section--right__amt-container__left">
+              <p class="card__section--right__amt-container__left__title">Tip Amount</p>
+              <small class="card__section--right__amt-container__left__small">/ person</small>
+            </div>
+            <span class="card__section--right__amt-container__amt">$4.27</span>
           </div>
-          <span class="card__section--right__amt-container__amt">$4.27</span>
-        </div>
-        <!-- prettier-ignore -->
-        <div class="card__section--right__total-container">
-          <div class="card__section--right__total-container__left">
-            <p class="card__section--right__total-container__left__title">Total</p>
-            <small class="card__section--right__total-container__left__small">/ person</small>
+          <!-- prettier-ignore -->
+          <div class="card__section--right__total-container">
+            <div class="card__section--right__total-container__left">
+              <p class="card__section--right__total-container__left__title">Total</p>
+              <small class="card__section--right__total-container__left__small">/ person</small>
+            </div>
+            <span class="card__section--right__total-container__amt">$32.79</span>
           </div>
-          <span class="card__section--right__total-container__amt">$32.79</span>
         </div>
 
-        <button>Reset</button>
+        <button class="reset-btn">Reset</button>
       </section>
     </main>
-    <footer>
+    <footer hidden>
       <div class="attribution">
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
