@@ -1,5 +1,8 @@
-$strongCyan: hsl(172, 67%, 45%);
+:root {
+  --input_icon-path: url(../images/icon-dollar.svg);
+}
 
+$strongCyan: hsl(172, 67%, 45%);
 $verydarkCyan: hsl(183, 100%, 15%);
 $darkGrayishCyan1: hsl(186, 14%, 43%);
 $darkGrayishCyan2: hsl(184, 14%, 56%);

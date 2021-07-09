@@ -9,6 +9,7 @@ body {
   margin: 0;
   font-family: "Space Mono", monospace;
   background-color: $lightGrayishCyan1;
+  color: white;
 }
 
 header {
@@ -37,6 +38,7 @@ header {
 
 .card {
   width: 100%;
+  margin: 0 auto;
   padding: 33px 25px;
   border-radius: 26px 26px 0 0;
   background: white;
@@ -62,17 +64,24 @@ header {
 input[type="number"] {
   width: 100%;
   color: $verydarkCyan;
-  background-color: #f4fafa;
   height: 46px;
-  background: #5f9ea038;
   border: none;
   margin: 5px 0;
   border-radius: 3px;
   font-weight: 700;
   text-align: right;
-  text-align-last: right;
   font-size: 1.5rem;
   padding-right: 19px;
+  background: var(--input_icon-path) no-repeat 20px;
+  background-color: #f4fafa;
+}
+
+input[name="people"] {
+  --input_icon-path: url(../images/icon-person.svg);
+}
+
+input[name="custom"] {
+  --input_icon-path: none;
 }
 
 .card__section--left__tip-title {
@@ -96,16 +105,19 @@ input[type="number"] {
     background-color: $verydarkCyan;
     @extend %btn;
 
-    &--custom {
-      color: $darkGrayishCyan2;
-      background-color: inherit;
-      text-align: right;
-      padding: 0 20px;
-    }
-
     &--active {
       color: $verydarkCyan;
       background-color: $strongCyan;
+    }
+  }
+
+  &__input {
+    background-color: inherit;
+    text-align: right;
+    padding: 0 20px;
+
+    &::placeholder {
+      color: $darkGrayishCyan2;
     }
   }
 }
@@ -168,12 +180,11 @@ input[type="number"] {
   color: $lightGrayishCyan1;
 }
 
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 785px) {
   .card {
     display: flex;
     gap: 25px;
     border-radius: 26px;
-    margin: 0 auto;
     max-height: 480px;
   }
 

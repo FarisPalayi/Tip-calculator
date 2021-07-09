@@ -76,6 +76,10 @@ select {
     scroll-behavior: auto !important;
   }
 }
+:root {
+  --input_icon-path: url(../images/icon-dollar.svg);
+}
+
 html {
   font-size: 16px;
 }
@@ -84,6 +88,7 @@ body {
   margin: 0;
   font-family: "Space Mono", monospace;
   background-color: #c5e4e7;
+  color: white;
 }
 
 header {
@@ -111,6 +116,7 @@ header > h1 {
 
 .card {
   width: 100%;
+  margin: 0 auto;
   padding: 33px 25px;
   border-radius: 26px 26px 0 0;
   background: white;
@@ -135,17 +141,24 @@ header > h1 {
 input[type=number] {
   width: 100%;
   color: #00494d;
-  background-color: #f4fafa;
   height: 46px;
-  background: #5f9ea038;
   border: none;
   margin: 5px 0;
   border-radius: 3px;
   font-weight: 700;
   text-align: right;
-  text-align-last: right;
   font-size: 1.5rem;
   padding-right: 19px;
+  background: var(--input_icon-path) no-repeat 20px;
+  background-color: #f4fafa;
+}
+
+input[name=people] {
+  --input_icon-path: url(../images/icon-person.svg);
+}
+
+input[name=custom] {
+  --input_icon-path: none;
 }
 
 .card__section--left__tip-title {
@@ -167,15 +180,17 @@ input[type=number] {
   color: white;
   background-color: #00494d;
 }
-.card__section--left__btns-wrapper__btn--custom {
-  color: #7f9c9f;
+.card__section--left__btns-wrapper__btn--active {
+  color: #00494d;
+  background-color: #26c0ab;
+}
+.card__section--left__btns-wrapper__input {
   background-color: inherit;
   text-align: right;
   padding: 0 20px;
 }
-.card__section--left__btns-wrapper__btn--active {
-  color: #00494d;
-  background-color: #26c0ab;
+.card__section--left__btns-wrapper__input::placeholder {
+  color: #7f9c9f;
 }
 
 .card__section__label-people {
@@ -233,12 +248,11 @@ input[type=number] {
   color: #c5e4e7;
 }
 
-@media screen and (min-width: 738px) {
+@media screen and (min-width: 785px) {
   .card {
     display: flex;
     gap: 25px;
     border-radius: 26px;
-    margin: 0 auto;
     max-height: 480px;
   }
 

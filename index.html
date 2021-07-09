@@ -38,30 +38,54 @@
     </header>
     <main class="card">
       <section class="card__section card__section--left">
-        <label for="bill" class="card__section__label card__section__label--bill">Bill</label>
+        <label
+          for="bill"
+          class="card__section__label card__section__label--bill"
+          >Bill</label
+        >
         <input
           type="number"
           name="bill"
           id="bill"
           class="card__section--left__bill-input"
           value="142.55"
+          min="0"
         />
         <p class="card__section--left__tip-title">Select Tip %</p>
         <div class="card__section--left__btns-wrapper">
           <button class="card__section--left__btns-wrapper__btn">5%</button>
           <button class="card__section--left__btns-wrapper__btn">10%</button>
-          <button class="card__section--left__btns-wrapper__btn card__section--left__btns-wrapper__btn--active">15%</button>
+          <button
+            class="
+              card__section--left__btns-wrapper__btn
+              card__section--left__btns-wrapper__btn--active
+            "
+          >
+            15%
+          </button>
           <button class="card__section--left__btns-wrapper__btn">25%</button>
           <button class="card__section--left__btns-wrapper__btn">50%</button>
-          <button class="card__section--left__btns-wrapper__btn card__section--left__btns-wrapper__btn--custom">Custom</button>
+          <input
+            type="number"
+            class="card__section--left__btns-wrapper__input"
+            name="custom"
+            id="custom"
+            placeholder="Custom"
+            min="0"
+          />
         </div>
-        <label for="people" class="card__section__label card__section__label-people">Number of People</label>
+        <label
+          for="people"
+          class="card__section__label card__section__label-people"
+          >Number of People</label
+        >
         <input
           type="number"
           name="people"
           id="people"
           class="card__section--left__people-input"
           value="5"
+          min="0"
         />
       </section>
       <section class="card__section card__section--right">
