@@ -1,44 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Tip calculator app</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+    <title>Frontend Mentor | Tip calculator app</title>
 
-  Bill
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Spli<br />tter</h1>
+    </header>
+    <main class="card">
+      <section class="card__section card__section--left">
+        <label for="bill" class="card__section--left__bill-label">Bill</label>
+        <input
+          type="number"
+          name="bill"
+          id="bill"
+          class="card__section--left__bill-input"
+        />
+        <p class="card__section--left__tip-title">Select Tip %</p>
+        <div class="card__section--left__btns-wrapper">
+          <button class="card__section--left__btns-wrapper__btn">5%</button>
+          <button class="card__section--left__btns-wrapper__btn">10%</button>
+          <button class="card__section--left__btns-wrapper__btn">15%</button>
+          <button class="card__section--left__btns-wrapper__btn">25%</button>
+          <button class="card__section--left__btns-wrapper__btn">50%</button>
+          <button class="card__section--left__btns-wrapper__btn">Custom</button>
+        </div>
+        <label for="people" class="card__section--left__people-label"
+          >Number of People</label
+        >
+        <input
+          type="number"
+          name="people"
+          id="people"
+          class="card__section--left__people-input"
+        />
+      </section>
+      <section class="card__section card__section--right">
+        <!-- prettier-ignore -->
+        <div class="card__section--right__amt-container">
+          <div class="card__section--right__amt-container__left">
+            <p class="card__section--right__amt-container__left__title">Tip Amount</p>
+            <small class="card__section--right__amt-container__left__small">/ person</small>
+          </div>
+          <span class="card__section--right__amt-container__amt">$4.27</span>
+        </div>
+        <!-- prettier-ignore -->
+        <div class="card__section--right__total-container">
+          <div class="card__section--right__total-container__left">
+            <p class="card__section--right__total-container__left__title">Total</p>
+            <small class="card__section--right__total-container__left__small">/ person</small>
+          </div>
+          <span class="card__section--right__total-container__amt">$32.79</span>
+        </div>
 
-  Number of People
-
-  Tip Amount
-  / person
-
-  Total
-  / person
-
-  Reset
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+        <button>Reset</button>
+      </section>
+    </main>
+    <footer>
+      <div class="attribution">
+        Challenge by
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+          >Frontend Mentor</a
+        >. Coded by <a href="#">Faris P</a>.
+      </div>
+    </footer>
+  </body>
 </html>
