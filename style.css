@@ -61,6 +61,19 @@ select {
   font: inherit;
 }
 
+/* Remove default arrow keys from input number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -80,21 +93,32 @@ select {
   --input_icon-path: url(../images/icon-dollar.svg);
 }
 
-html {
-  font-size: 16px;
-}
-
-body {
-  margin: 0;
-  font-family: "Space Mono", monospace;
-  background-color: #c5e4e7;
-  color: white;
+.reset-btn, .card__section--left__btns-wrapper__btn {
+  border-radius: 6px;
+  border: none;
+  color: inherit;
+  text-transform: uppercase;
 }
 
 header {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+html {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Mono", monospace;
+  background-color: #c5e4e7;
+}
+
+header {
   font-size: 0.74rem;
   height: 144px;
   text-align: center;
@@ -107,13 +131,6 @@ header > h1 {
   padding-left: 11px;
 }
 
-.reset-btn, .card__section--left__btns-wrapper__btn {
-  border-radius: 6px;
-  border: none;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
 .card {
   width: 100%;
   margin: 0 auto;
@@ -122,8 +139,34 @@ header > h1 {
   background: white;
   max-width: 919px;
 }
+@media screen and (min-width: 785px) {
+  .card {
+    display: flex;
+    gap: 25px;
+    border-radius: 26px;
+    max-height: 480px;
+  }
+}
 .card > * {
   flex-basis: 100%;
+}
+
+input[type=number] {
+  width: 100%;
+  color: #00494d;
+  height: 46px;
+  border: none;
+  margin: 5px 0;
+  border-radius: 5px;
+  text-align: right;
+  font-size: 1.5rem;
+  padding-right: 19px;
+  background: var(--input_icon-path) no-repeat 20px;
+  background-color: #f4fafa;
+}
+input[type=number]:focus {
+  border: 2px solid #26c0ab;
+  outline: transparent 2px solid;
 }
 
 .card__section--left {
@@ -133,24 +176,7 @@ header > h1 {
 .card__section__label {
   display: block;
   letter-spacing: 0px;
-  font-weight: 700;
-  font-size: 1rem;
   color: #7f9c9f;
-}
-
-input[type=number] {
-  width: 100%;
-  color: #00494d;
-  height: 46px;
-  border: none;
-  margin: 5px 0;
-  border-radius: 3px;
-  font-weight: 700;
-  text-align: right;
-  font-size: 1.5rem;
-  padding-right: 19px;
-  background: var(--input_icon-path) no-repeat 20px;
-  background-color: #f4fafa;
 }
 
 input[name=people] {
@@ -164,7 +190,6 @@ input[name=custom] {
 .card__section--left__tip-title {
   margin-top: 30px;
   color: #7f9c9f;
-  font-weight: 700;
 }
 
 .card__section--left__btns-wrapper {
@@ -177,8 +202,10 @@ input[name=custom] {
 }
 .card__section--left__btns-wrapper__btn {
   font-size: 1.48rem;
-  color: white;
   background-color: #00494d;
+}
+.card__section--left__btns-wrapper__btn:hover {
+  background-color: #26c0ab;
 }
 .card__section--left__btns-wrapper__btn--active {
   color: #00494d;
@@ -207,8 +234,10 @@ input[name=custom] {
   flex-direction: column;
   justify-content: space-between;
 }
-.card__section--right > * {
-  color: white;
+@media screen and (min-width: 785px) {
+  .card__section--right {
+    margin: 0;
+  }
 }
 
 .card__section--right__amt-container,
@@ -234,31 +263,13 @@ input[name=custom] {
 .card__section--right__total-container__amt,
 .card__section--right__amt-container__amt {
   font-size: 1.95rem;
-  font-weight: 600;
   color: #26c0ab;
-}
-
-.card__section--right__total-container__left__title,
-.card__section--right__amt-container__left__title {
-  font-weight: 600;
 }
 
 .card__section--right__total-container__left__small,
 .card__section--right__amt-container__left__small {
   color: #c5e4e7;
-}
-
-@media screen and (min-width: 785px) {
-  .card {
-    display: flex;
-    gap: 25px;
-    border-radius: 26px;
-    max-height: 480px;
-  }
-
-  .card__section--right {
-    margin: 0;
-  }
+  font-weight: normal;
 }
 
 /*# sourceMappingURL=style.css.map */

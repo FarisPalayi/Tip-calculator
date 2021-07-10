@@ -1,0 +1,67 @@
+@use 'abstract' as *;
+
+html {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Mono", monospace;
+  background-color: $lightGrayishCyan1;
+}
+
+header {
+  @extend %flex-center;
+  font-size: 0.74rem;
+  height: 144px;
+  text-align: center;
+  color: $darkGrayishCyan1;
+
+  > h1 {
+    text-transform: uppercase;
+    letter-spacing: 11px;
+    margin-top: 9px;
+    padding-left: 11px;
+  }
+}
+
+.card {
+  width: 100%;
+  margin: 0 auto;
+  padding: 33px 25px;
+  border-radius: 26px 26px 0 0;
+  background: white;
+  max-width: 919px;
+
+  @include bp() {
+    display: flex;
+    gap: 25px;
+    border-radius: 26px;
+    max-height: 480px;
+  }
+
+  > * {
+    flex-basis: 100%;
+  }
+}
+
+input[type="number"] {
+  width: 100%;
+  color: $verydarkCyan;
+  height: 46px;
+  border: none;
+  margin: 5px 0;
+  border-radius: 5px;
+  text-align: right;
+  font-size: 1.5rem;
+  padding-right: 19px;
+  background: var(--input_icon-path) no-repeat 20px;
+  background-color: #f4fafa;
+
+  &:focus {
+    border: 2px solid $strongCyan;
+    outline: transparent 2px solid;
+  }
+}

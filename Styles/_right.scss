@@ -1,0 +1,50 @@
+
+@use 'abstract' as *;
+
+.card__section--right {
+  margin: 27px 0;
+  background-color: $verydarkCyan;
+  padding: 23px;
+  border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @include bp() {
+      margin: 0
+  }
+}
+
+.card__section--right__amt-container,
+.card__section--right__total-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 13px;
+  padding-bottom: 8px;
+}
+
+.card__section--right__total-container {
+  margin-bottom: 26px;
+}
+
+.reset-btn {
+  width: 100%;
+  height: 48px;
+  background-color: $strongCyan;
+  color: $verydarkCyan;
+  font-size: 1.3rem;
+  @extend %btn;
+}
+
+.card__section--right__total-container__amt,
+.card__section--right__amt-container__amt {
+  font-size: 1.95rem;
+  color: $strongCyan;
+}
+
+.card__section--right__total-container__left__small,
+.card__section--right__amt-container__left__small {
+  color: $lightGrayishCyan1;
+  font-weight: normal;
+}
