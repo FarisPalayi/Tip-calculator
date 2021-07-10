@@ -22,6 +22,8 @@ billPercentBtns === null || billPercentBtns === void 0 ? void 0 : billPercentBtn
         setBtnActive(percentBtn, true);
     });
 });
+function updateCustomInputDataPercent(event) {
+}
 function updateTipPercent(event) {
     var _a;
     var clickedElmPercent = (_a = event.target) === null || _a === void 0 ? void 0 : _a.getAttribute('data-percent');
@@ -58,8 +60,11 @@ function calculateTip() {
 function calculateTipPerPerson() {
     return calculateTip() / people;
 }
+function prependDollarSign(amount) {
+    return "$" + amount.toFixed(2);
+}
 function showTipPerPerson() {
-    tipAmountElm.innerHTML = calculateTipPerPerson().toFixed(2);
+    tipAmountElm.innerHTML = prependDollarSign(calculateTipPerPerson());
 }
 function calculateTotalBill() {
     return bill + calculateTip();
@@ -68,7 +73,8 @@ function calculateTotalBillPerPerson() {
     return calculateTotalBill() / people;
 }
 function showTotalBillPerPerson() {
-    totalBillElm.innerHTML = calculateTotalBillPerPerson().toFixed(2);
+    totalBillElm.innerHTML = prependDollarSign(calculateTotalBillPerPerson());
 }
 showTipPerPerson();
 showTotalBillPerPerson();
+// -------------------------

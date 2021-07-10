@@ -18,14 +18,17 @@ let tipInPercent: number = 0;
 let people: number = parseInt(peopleInput!.value) || 0;
 
 billPercentBtns?.forEach((percentBtn: Element): void => {
-    percentBtn.addEventListener('click', (event: Event): void => {
-        updateTipPercent(event);
-        showTipPerPerson();
-        showTotalBillPerPerson();
-        removeBtnActive();
-        setBtnActive(percentBtn, true);
-    });
+  percentBtn.addEventListener('click', (event: Event): void => {
+    updateTipPercent(event);
+    showTipPerPerson();
+    showTotalBillPerPerson();
+    removeBtnActive();
+    setBtnActive(percentBtn, true);
+  });
 });
+
+function updateCustomInputDataPercent(event: Event): void {
+}
 
 function updateTipPercent(event: Event): void {
   const clickedElmPercent = (event.target as HTMLButtonElement | HTMLInputElement)?.getAttribute('data-percent');
@@ -44,9 +47,9 @@ function removeBtnActive(): void {
 }
 
 billInput?.addEventListener('input', (): void => {
-    updateBill();
-    showTipPerPerson();
-    showTotalBillPerPerson();
+  updateBill();
+  showTipPerPerson();
+  showTotalBillPerPerson();
 });
 
 function updateBill(): void {
@@ -54,9 +57,9 @@ function updateBill(): void {
 }
 
 peopleInput?.addEventListener('input', (): void => {
-    updatePeople();
-    showTipPerPerson();
-    showTotalBillPerPerson();
+  updatePeople();
+  showTipPerPerson();
+  showTotalBillPerPerson();
 });
 
 function updatePeople(): void {
@@ -71,8 +74,12 @@ function calculateTipPerPerson(): number {
   return calculateTip() / people;
 }
 
+function prependDollarSign(amount: number): string {
+  return `$${amount.toFixed(2)}`;
+}
+
 function showTipPerPerson(): void {
-  tipAmountElm!.innerHTML = calculateTipPerPerson().toFixed(2);
+  tipAmountElm!.innerHTML = prependDollarSign(calculateTipPerPerson());
 }
 
 function calculateTotalBill(): number {
@@ -84,8 +91,10 @@ function calculateTotalBillPerPerson(): number {
 }
 
 function showTotalBillPerPerson(): void {
-  totalBillElm!.innerHTML = calculateTotalBillPerPerson().toFixed(2);
+  totalBillElm!.innerHTML = prependDollarSign(calculateTotalBillPerPerson());
 }
 
 showTipPerPerson();
 showTotalBillPerPerson();
+
+// -------------------------
