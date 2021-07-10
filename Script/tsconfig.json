@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "rootDir": "./",
-    "outDir": "./"
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
   }
 }

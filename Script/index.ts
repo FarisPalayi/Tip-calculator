@@ -1,33 +1,59 @@
-const billInput = document.querySelector('input[name=bill]') as HTMLInputElement;
-const billPercentBtns = document.querySelectorAll('.card__section__btns-wrapper__btn');
-const tipAmountElm = document.querySelector('.card__section__container--tip .card__section__container__amount') as HTMLSpanElement;
-const totalBillElm = document.querySelector('.card__section__container--total .card__section__container__amount') as HTMLSpanElement;
-const peopleInput = document.querySelector('input[name=people]') as HTMLInputElement;
+const billInput: HTMLInputElement | null = document.querySelector('input[name=bill]');
+const billPercentBtns: NodeListOf<Element> | null = document.querySelectorAll('.card__section__btns-wrapper__btn');
+const tipAmountElm: HTMLSpanElement | null = document.querySelector('.card__section__container--tip .card__section__container__amount');
+const totalBillElm: HTMLSpanElement | null = document.querySelector('.card__section__container--total .card__section__container__amount');
+const peopleInput: HTMLInputElement | null = document.querySelector('input[name=people]');
 
-let bill = billInput.value;
-let tipPercent = 0;
-let people = peopleInput.value;
+let bill: number = parseFloat(billInput!.value) || 0;
+let tipInPercent: number = 0;
+let people: number = parseInt(peopleInput!.value) || 0;
 
-billPercentBtns.forEach((percentBtn) => {
-percentBtn.addEventListener('click', () => {
-    tipPercent = parseInt(percentBtn.getAttribute('data-percent'));
-    showTipPerson(calculateTipPerPerson(bill, tipPercent));
-    showTotalBill(calculateTotalBillPerPerson(bill, people));
-});
+billPercentBtns.forEach((percentBtn: Element) => {
+  percentBtn.addEventListener('click', updateTipPercent);
+  percentBtn.addEventListener('click', showTipPerPerson);
+  percentBtn.addEventListener('click', showTotalBillPerPerson);
 });
 
-function showTipPerson(tipAmount) {
-    tipAmountElm.innerHTML = tipAmount;
+function updateTipPercent(event: Event): void {
+  const clickedElmPercent = (event.target as HTMLButtonElement | HTMLInputElement)?.getAttribute('data-percent')
+  tipInPercent = parseFloat(clickedElmPercent!);
 }
 
-function calculateTipPerPerson(bill, tipPercent) {
-    return bill * tipPercent / 100;
+billInput?.addEventListener('input', updateBill)
+
+function updateBill(): void {
+  bill = parseFloat(billInput!.value) || 50;
 }
 
-function showTotalBill(totalBill) {
-    totalBillElm.innerHTML = totalBill;
+peopleInput?.addEventListener('input', updatePeople);
+
+function updatePeople(): void {
+  people = parseInt(peopleInput!.value) || 0;
 }
 
-function calculateTotalBillPerPerson(bill, people) {
-    return bill * people;
+function calculateTip(): number {
+  return bill * tipInPercent / 100;
 }
+
+function calculateTipPerPerson(): number {
+  return calculateTip() / people;
+}
+
+function showTipPerPerson(): void {
+  tipAmountElm!.innerHTML = calculateTipPerPerson().toFixed(2);
+}
+
+function calculateTotalBill(): number {
+  return bill + calculateTip();
+}
+
+function calculateTotalBillPerPerson(): number {
+  return calculateTotalBill() / people;
+}
+
+function showTotalBillPerPerson(): void {
+  totalBillElm!.innerHTML = calculateTotalBillPerPerson().toFixed(2);
+}
+
+showTipPerPerson();
+showTotalBillPerPerson();
