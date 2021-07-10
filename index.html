@@ -21,6 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <script src="./Script/index.js" defer></script>
 
     <style>
       .attribution {
@@ -36,39 +37,45 @@
     <header>
       <h1 class="title">Spli<br />tter</h1>
     </header>
+
     <main class="card">
       <section class="card__section card__section--left">
-        <label
-          for="bill"
-          class="card__section__label card__section__label--bill"
-          >Bill</label
-        >
+        <label for="bill" class="card__section__label">Bill</label>
         <input
           type="number"
           name="bill"
           id="bill"
-          class="card__section--left__bill-input"
-          value="142.55"
+          class="card__section__bill-input"
+          value="100"
           placeholder="0"
           min="0"
         />
-        <p class="card__section--left__tip-title">Select Tip %</p>
-        <div class="card__section--left__btns-wrapper">
-          <button class="card__section--left__btns-wrapper__btn">5%</button>
-          <button class="card__section--left__btns-wrapper__btn">10%</button>
+        <p class="card__section__tip-title">Select Tip %</p>
+        <div class="card__section__btns-wrapper">
+          <button class="card__section__btns-wrapper__btn" data-percent="5">
+            5%
+          </button>
+          <button class="card__section__btns-wrapper__btn" data-percent="10">
+            10%
+          </button>
           <button
             class="
-              card__section--left__btns-wrapper__btn
-              card__section--left__btns-wrapper__btn--active
+              card__section__btns-wrapper__btn
+              card__section__btns-wrapper__btn--active
             "
+            data-percent="15"
           >
             15%
           </button>
-          <button class="card__section--left__btns-wrapper__btn">25%</button>
-          <button class="card__section--left__btns-wrapper__btn">50%</button>
+          <button class="card__section__btns-wrapper__btn" data-percent="25">
+            25%
+          </button>
+          <button class="card__section__btns-wrapper__btn" data-percent="50">
+            50%
+          </button>
           <input
             type="number"
-            class="card__section--left__btns-wrapper__input"
+            class="card__section__btns-wrapper__input"
             name="custom"
             id="custom"
             placeholder="Custom"
@@ -77,7 +84,7 @@
         </div>
         <label
           for="people"
-          class="card__section__label card__section__label-people"
+          class="card__section__label card__section__label--people"
           >Number of People</label
         >
         <input
@@ -90,29 +97,24 @@
           min="0"
         />
       </section>
+
       <section class="card__section card__section--right">
         <div>
           <!-- prettier-ignore -->
-          <div class="card__section--right__amt-container">
-            <div class="card__section--right__amt-container__left">
-              <p class="card__section--right__amt-container__left__title">Tip Amount
-              <small class="card__section--right__amt-container__left__small">/ person</small></p>
-            </div>
-            <span class="card__section--right__amt-container__amt" aria-live="polite">$4.27</span>
+          <div class="card__section__container card__section__container--tip">
+            <p class="card__section__container__title">Tip Amount<span>/ person</span></p>
+            <span class="card__section__container__amount" aria-live="polite">$4.27</span>
           </div>
           <!-- prettier-ignore -->
-          <div class="card__section--right__total-container">
-            <div class="card__section--right__total-container__left">
-              <p class="card__section--right__total-container__left__title">Total
-              <small class="card__section--right__total-container__left__small">/ person</small></p>
-            </div>
-            <span class="card__section--right__total-container__amt" aria-live="polite">$32.79</span>
+          <div class="card__section__container card__section__container--total">
+            <p class="card__section__container__title">Total<span>/ person</span></p>
+            <span class="card__section__container__amount" aria-live="polite">$32.79</span>
           </div>
         </div>
-
         <button class="reset-btn">Reset</button>
       </section>
     </main>
+
     <footer hidden>
       <div class="attribution">
         Challenge by

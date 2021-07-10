@@ -1,0 +1,45 @@
+:root
+  --input_icon-path: url(../images/icon-dollar.svg)
+
+$strongCyan: hsl(172, 67%, 45%)
+$verydarkCyan: hsl(183, 100%, 15%)
+$darkGrayishCyan1: hsl(186, 14%, 43%)
+$darkGrayishCyan2: hsl(184, 14%, 56%)
+$lightGrayishCyan1: hsl(185, 41%, 84%)
+$lightGrayishCyan2: hsl(189, 41%, 97%)
+
+%btn
+  border-radius: 6px
+  border: none
+  color: inherit
+  text-transform: uppercase
+
+%grid-center
+  display: grid
+  place-items: center
+
+@mixin bp()
+  @media screen and (min-width: 785px)
+    @content
+
+// this is a reusable flexbox mixin that I use.
+// unnecessary/unwanted properties are handled by passing null or false as a value
+
+@mixin flexbox($dir: null, $jc: null, $ai: null, $gap: null)
+  display: flex
+
+  @if $dir == col
+    flex-direction: column
+  @else if $dir == column
+    flex-direction: column
+  @else if $dir == row
+    flex-direction: row
+
+  @if $ai
+    align-items: $ai
+
+  @if $jc
+    justify-content: $jc
+
+  @if $gap
+    gap: $gap
