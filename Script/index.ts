@@ -1,31 +1,63 @@
+/**
+ * @author Faris P
+ * @license MIT
+ * @description basic tip calculator
+ */
+
 const billInput: HTMLInputElement | null = document.querySelector('input[name=bill]');
 const billPercentBtns: NodeListOf<Element> | null = document.querySelectorAll('.card__section__btns-wrapper__btn');
 const tipAmountElm: HTMLSpanElement | null = document.querySelector('.card__section__container--tip .card__section__container__amount');
 const totalBillElm: HTMLSpanElement | null = document.querySelector('.card__section__container--total .card__section__container__amount');
 const peopleInput: HTMLInputElement | null = document.querySelector('input[name=people]');
+const customTipPercentInput: HTMLInputElement | null = document.querySelector('input[name=custom]');
+
+// -------------------------
 
 let bill: number = parseFloat(billInput!.value) || 0;
 let tipInPercent: number = 0;
 let people: number = parseInt(peopleInput!.value) || 0;
 
-billPercentBtns.forEach((percentBtn: Element) => {
-  percentBtn.addEventListener('click', updateTipPercent);
-  percentBtn.addEventListener('click', showTipPerPerson);
-  percentBtn.addEventListener('click', showTotalBillPerPerson);
+billPercentBtns?.forEach((percentBtn: Element): void => {
+    percentBtn.addEventListener('click', (event: Event): void => {
+        updateTipPercent(event);
+        showTipPerPerson();
+        showTotalBillPerPerson();
+        removeBtnActive();
+        setBtnActive(percentBtn, true);
+    });
 });
 
 function updateTipPercent(event: Event): void {
-  const clickedElmPercent = (event.target as HTMLButtonElement | HTMLInputElement)?.getAttribute('data-percent')
+  const clickedElmPercent = (event.target as HTMLButtonElement | HTMLInputElement)?.getAttribute('data-percent');
   tipInPercent = parseFloat(clickedElmPercent!);
 }
 
-billInput?.addEventListener('input', updateBill)
+function setBtnActive(element: Element, active: boolean): void {
+  const btnActiveClass = 'card__section__btns-wrapper__btn--active'
+  element.classList.toggle(btnActiveClass, active);
+}
+
+function removeBtnActive(): void {
+  billPercentBtns?.forEach((percentBtn: Element): void => {
+    setBtnActive(percentBtn, false);
+  });
+}
+
+billInput?.addEventListener('input', (): void => {
+    updateBill();
+    showTipPerPerson();
+    showTotalBillPerPerson();
+});
 
 function updateBill(): void {
   bill = parseFloat(billInput!.value) || 50;
 }
 
-peopleInput?.addEventListener('input', updatePeople);
+peopleInput?.addEventListener('input', (): void => {
+    updatePeople();
+    showTipPerPerson();
+    showTotalBillPerPerson();
+});
 
 function updatePeople(): void {
   people = parseInt(peopleInput!.value) || 0;
