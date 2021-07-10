@@ -272,4 +272,9 @@ input[name=custom] {
   font-weight: normal;
 }
 
+.card__section--right__amt-container__left__title,
+.card__section--right__total-container__left__title {
+  max-width: 100px;
+}
+
 /*# sourceMappingURL=style.css.map */
