@@ -12,7 +12,7 @@ var totalBillElm = document.querySelector('.card__section__container--total .car
 var peopleInput = document.querySelector('input[name=people]');
 var customTipPercentInput = document.querySelector('input[name=custom]');
 // -------------------------
-// vars
+// global variables
 var bill = parseFloat(billInput.value) || 0;
 var tipInPercent = .15; // initial value
 var people = parseInt(peopleInput.value) || 1;
@@ -124,11 +124,20 @@ function hideErrorMsg() {
     errorElm === null || errorElm === void 0 ? void 0 : errorElm.setAttribute('aria-hidden', 'true');
     errorElm === null || errorElm === void 0 ? void 0 : errorElm.classList.remove('card__section__error--visible');
 }
+function setPeopleInputValid() {
+    peopleInput.setCustomValidity('');
+    console.log("valid");
+}
+function setPeopleInputInvalid() {
+    peopleInput.setCustomValidity('Please enter a number greater than 0');
+}
 function validatePeopleInput() {
     if (isPeopleInuputValild()) {
         hideErrorMsg();
+        setPeopleInputValid();
     }
     else {
         showErrorMsg();
+        setPeopleInputInvalid();
     }
 }

@@ -15,7 +15,7 @@ const peopleInput: HTMLInputElement | null = document.querySelector('input[name=
 const customTipPercentInput: HTMLInputElement | null = document.querySelector('input[name=custom]');
 
 // -------------------------
-// vars
+// global variables
 
 let bill: number = parseFloat(billInput!.value) || 0;
 let tipInPercent: number = .15; // initial value
@@ -161,10 +161,21 @@ function hideErrorMsg(): void {
   errorElm?.classList.remove('card__section__error--visible');
 }
 
+function setPeopleInputValid(): void {
+  peopleInput!.setCustomValidity('');
+  console.log("valid");
+}
+
+function setPeopleInputInvalid(): void {
+  peopleInput!.setCustomValidity('Please enter a number greater than 0');
+}
+
 function validatePeopleInput(): void {
   if (isPeopleInuputValild()) {
     hideErrorMsg();
+    setPeopleInputValid()
   } else {
     showErrorMsg();
+    setPeopleInputInvalid()
   }
 }
