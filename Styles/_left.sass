@@ -9,9 +9,6 @@
   letter-spacing: 0px
   color: $darkGrayishCyan2
 
-input[name="people"] 
-  --input_icon-path: url(../images/icon-person.svg)
-
 input[name="custom"] 
   --input_icon-path: none
 
@@ -50,3 +47,13 @@ input[name="custom"]
 .card__section__label--people 
   margin-top: 30px
   margin-bottom: 2px
+
+input[name="people"] 
+  --input_icon-path: url(../images/icon-person.svg)
+
+.card__section__error
+  opacity: 0
+  color: red
+
+  &--visible
+    opacity: 1

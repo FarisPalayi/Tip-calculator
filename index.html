@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
 
     <link
       rel="icon"
@@ -49,45 +48,27 @@
           value="100"
           placeholder="0"
           min="0"
+          required
         />
         <p class="card__section__tip-title">Select Tip %</p>
         <div class="card__section__btns-wrapper">
-          <button class="card__section__btns-wrapper__btn" data-percent="5">
-            5%
-          </button>
-          <button class="card__section__btns-wrapper__btn" data-percent="10">
-            10%
-          </button>
-          <button
-            class="
-              card__section__btns-wrapper__btn
-              card__section__btns-wrapper__btn--active
-            "
-            data-percent="15"
-          >
-            15%
-          </button>
-          <button class="card__section__btns-wrapper__btn" data-percent="25">
-            25%
-          </button>
-          <button class="card__section__btns-wrapper__btn" data-percent="50">
-            50%
-          </button>
+          <button class="card__section__btns-wrapper__btn" data-percent="5">5%</button>
+          <button class="card__section__btns-wrapper__btn" data-percent="10">10%</button>
+          <button class="card__section__btns-wrapper__btn card__section__btns-wrapper__btn--active" data-percent="15">15%</button>
+          <button class="card__section__btns-wrapper__btn" data-percent="25">25%</button>
+          <button class="card__section__btns-wrapper__btn" data-percent="50"> 50%</button>
           <input
             type="number"
             class="card__section__btns-wrapper__input"
             name="custom"
             id="custom"
             placeholder="Custom"
+            aria-label="add custom tip amount (in percents)"
             min="0"
-            data-percent="0"
           />
         </div>
-        <label
-          for="people"
-          class="card__section__label card__section__label--people"
-          >Number of People</label
-        >
+        <label for="people" class="card__section__label card__section__label--people">Number of People</label>
+        <span class="card__section__error" aria-hidden="true">Can't be zero</span>
         <input
           type="number"
           name="people"
@@ -96,6 +77,7 @@
           value="5"
           placeholder="0"
           min="0"
+          required
         />
       </section>
 
@@ -103,16 +85,16 @@
         <div>
           <!-- prettier-ignore -->
           <div class="card__section__container card__section__container--tip">
-            <p class="card__section__container__title">Tip Amount<span>/ person</span></p>
-            <span class="card__section__container__amount" aria-live="polite">$4.27</span>
+            <p class="card__section__container__title" id="tip-amount">Tip Amount<span>/ person</span></p>
+            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="tip-amount">$4.27</span>
           </div>
           <!-- prettier-ignore -->
           <div class="card__section__container card__section__container--total">
-            <p class="card__section__container__title">Total<span>/ person</span></p>
-            <span class="card__section__container__amount" aria-live="polite">$32.79</span>
+            <p class="card__section__container__title" id="total-person">Total<span>/ person</span></p>
+            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="total-person">$32.79</span>
           </div>
         </div>
-        <button class="reset-btn">Reset</button>
+        <button class="card__section__reset-btn">Reset</button>
       </section>
     </main>
 
