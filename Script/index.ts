@@ -122,7 +122,7 @@ peopleInput?.addEventListener('input', (): void => {
   updatePeople();
   showTipPerPerson();
   showTotalBillPerPerson();
-  validate();
+  validatePeopleInput();
 });
 
 // -------------------------
@@ -134,7 +134,7 @@ reset?.addEventListener('click', resetInputs);
 
 function resetInputs(): void {
   billInput!.value = '0';
-  peopleInput!.value = '0';
+  peopleInput!.value = '1';
   customTipPercentInput!.value = '0';
   tipAmountElm!.innerHTML = '$0.00';
   totalBillElm!.innerHTML = '$0.00';
@@ -145,27 +145,25 @@ function resetInputs(): void {
 
 const errorElm: HTMLSpanElement | null = document.querySelector('.card__section__error');
 
-function isValidInputs(): boolean {
+function isPeopleInuputValild(): boolean {
   const peopleInputAsANumber: number = parseInt(peopleInput!.value);
   return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
 }
 
-function showError(): void {
+function showErrorMsg(): void {
   errorElm?.setAttribute('aria-hidden', 'false');
-  errorElm!.classList.add('card__section__error--visible');
+  errorElm?.classList.add('card__section__error--visible');
 }
 
-function hideError(): void {
-  errorElm!.setAttribute('aria-hidden', 'true');
-  errorElm!.classList.remove('card__section__error--visible');
+function hideErrorMsg(): void {
+  errorElm?.setAttribute('aria-hidden', 'true');
+  errorElm?.classList.remove('card__section__error--visible');
 }
 
-function validate(): void {
-  if (isValidInputs()) {
-    hideError();
-    console.log(true)
+function validatePeopleInput(): void {
+  if (isPeopleInuputValild()) {
+    hideErrorMsg();
   } else {
-    showError();
-    console.log(false)
+    showErrorMsg();
   }
 }

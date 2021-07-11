@@ -95,7 +95,7 @@ peopleInput === null || peopleInput === void 0 ? void 0 : peopleInput.addEventLi
     updatePeople();
     showTipPerPerson();
     showTotalBillPerPerson();
-    validate();
+    validatePeopleInput();
 });
 // -------------------------
 // resets the inputs
@@ -103,7 +103,7 @@ var reset = document.querySelector('.card__section__reset-btn');
 reset === null || reset === void 0 ? void 0 : reset.addEventListener('click', resetInputs);
 function resetInputs() {
     billInput.value = '0';
-    peopleInput.value = '0';
+    peopleInput.value = '1';
     customTipPercentInput.value = '0';
     tipAmountElm.innerHTML = '$0.00';
     totalBillElm.innerHTML = '$0.00';
@@ -111,25 +111,23 @@ function resetInputs() {
 // -------------------------
 // validation
 var errorElm = document.querySelector('.card__section__error');
-function isValidInputs() {
+function isPeopleInuputValild() {
     var peopleInputAsANumber = parseInt(peopleInput.value);
     return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
 }
-function showError() {
+function showErrorMsg() {
     errorElm === null || errorElm === void 0 ? void 0 : errorElm.setAttribute('aria-hidden', 'false');
-    errorElm.classList.add('card__section__error--visible');
+    errorElm === null || errorElm === void 0 ? void 0 : errorElm.classList.add('card__section__error--visible');
 }
-function hideError() {
-    errorElm.setAttribute('aria-hidden', 'true');
-    errorElm.classList.remove('card__section__error--visible');
+function hideErrorMsg() {
+    errorElm === null || errorElm === void 0 ? void 0 : errorElm.setAttribute('aria-hidden', 'true');
+    errorElm === null || errorElm === void 0 ? void 0 : errorElm.classList.remove('card__section__error--visible');
 }
-function validate() {
-    if (isValidInputs()) {
-        hideError();
-        console.log(true);
+function validatePeopleInput() {
+    if (isPeopleInuputValild()) {
+        hideErrorMsg();
     }
     else {
-        showError();
-        console.log(false);
+        showErrorMsg();
     }
 }
