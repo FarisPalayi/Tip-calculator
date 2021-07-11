@@ -5,7 +5,7 @@
  */
 
 // -------------------------
-// elements
+// grab the dom elements
 
 const billInput: HTMLInputElement | null = document.querySelector('input[name=bill]');
 const billPercentBtns: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll('.card__section__btns-wrapper__btn');
@@ -42,7 +42,7 @@ function updatePeople(): void {
 }
 
 // -------------------------
-// 
+// calculate tip
 
 function calculateTip(): number {
   return bill * tipInPercent / 100;
@@ -63,7 +63,7 @@ function showTipPerPerson(): void {
 showTipPerPerson();
 
 // -------------------------
-// 
+// calculate total bill
 
 function calculateTotalBill(): number {
   return bill + calculateTip();
@@ -93,7 +93,7 @@ function removeBtnActive(): void {
 }
 
 // -------------------------
-// 
+// event listeners
 
 billInput?.addEventListener('input', (): void => {
   updateBill();
@@ -138,6 +138,7 @@ function resetInputs(): void {
   customTipPercentInput!.value = '0';
   tipAmountElm!.innerHTML = '$0.00';
   totalBillElm!.innerHTML = '$0.00';
+  hideErrorMsg();
 }
 
 // -------------------------

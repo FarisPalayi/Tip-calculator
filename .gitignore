@@ -16,3 +16,6 @@
 .prettierignore
 node_modules
 text.txt
+.vercel
+.vercel.json
+*.map

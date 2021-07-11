@@ -4,7 +4,7 @@
  * @description a basic tip calculator
  */
 // -------------------------
-// elements
+// grab the dom elements
 var billInput = document.querySelector('input[name=bill]');
 var billPercentBtns = document.querySelectorAll('.card__section__btns-wrapper__btn');
 var tipAmountElm = document.querySelector('.card__section__container--tip .card__section__container__amount');
@@ -33,7 +33,7 @@ function updatePeople() {
     people = parseInt(peopleInput.value) || 0;
 }
 // -------------------------
-// 
+// calculate tip
 function calculateTip() {
     return bill * tipInPercent / 100;
 }
@@ -48,7 +48,7 @@ function showTipPerPerson() {
 }
 showTipPerPerson();
 // -------------------------
-// 
+// calculate total bill
 function calculateTotalBill() {
     return bill + calculateTip();
 }
@@ -70,7 +70,7 @@ function removeBtnActive() {
     });
 }
 // -------------------------
-// 
+// event listeners
 billInput === null || billInput === void 0 ? void 0 : billInput.addEventListener('input', function () {
     updateBill();
     showTipPerPerson();
@@ -107,6 +107,7 @@ function resetInputs() {
     customTipPercentInput.value = '0';
     tipAmountElm.innerHTML = '$0.00';
     totalBillElm.innerHTML = '$0.00';
+    hideErrorMsg();
 }
 // -------------------------
 // validation
