@@ -56,8 +56,21 @@ function prependDollarSign(amount: number): string {
   return `$${amount.toFixed(2)}`;
 }
 
+// validate tip
+
+function isTipAmountValid(): boolean {
+  const calculatedTipAmount: number = calculateTipPerPerson();
+  return !isNaN(calculatedTipAmount) && isFinite(calculatedTipAmount) && calculatedTipAmount > 0;
+}
+
+// show tip
+
 function showTipPerPerson(): void {
-  tipAmountElm!.innerHTML = prependDollarSign(calculateTipPerPerson()) || '$0.00';
+  if (isTipAmountValid()) {
+    tipAmountElm!.innerText = prependDollarSign(calculateTipPerPerson());
+  } else {
+    tipAmountElm!.innerText = prependDollarSign(0);
+  }
 }
 
 showTipPerPerson();
@@ -73,8 +86,21 @@ function calculateTotalBillPerPerson(): number {
   return calculateTotalBill() / people;
 }
 
+// validate total bill
+
+function isBillAmountValid(): boolean {
+  const calculatedTotalBillAmount: number = calculateTotalBillPerPerson();
+  return !isNaN(calculatedTotalBillAmount) && isFinite(calculatedTotalBillAmount) && calculatedTotalBillAmount > 0;
+}
+
+// show total bill
+
 function showTotalBillPerPerson(): void {
-  totalBillElm!.innerHTML = prependDollarSign(calculateTotalBillPerPerson()) || '$0.00';
+  if(isBillAmountValid()) {
+    totalBillElm!.innerHTML = prependDollarSign(calculateTotalBillPerPerson());
+  } else {
+    totalBillElm!.innerText =  prependDollarSign(0);
+  }
 }
 
 showTotalBillPerPerson();
@@ -142,7 +168,7 @@ function resetInputs(): void {
 }
 
 // -------------------------
-// validation
+// validate the people input
 
 const errorElm: HTMLSpanElement | null = document.querySelector('.card__section__error');
 
@@ -162,12 +188,11 @@ function hideErrorMsg(): void {
 }
 
 function setPeopleInputValid(): void {
-  peopleInput!.setCustomValidity('');
-  console.log("valid");
+  peopleInput?.setCustomValidity('');
 }
 
 function setPeopleInputInvalid(): void {
-  peopleInput!.setCustomValidity('Please enter a number greater than 0');
+  peopleInput?.setCustomValidity('Please enter a number greater than 0');
 }
 
 function validatePeopleInput(): void {
@@ -179,3 +204,16 @@ function validatePeopleInput(): void {
     setPeopleInputInvalid()
   }
 }
+
+// difference between textContent and innerHTML
+// textContent is used for text node
+// innerHTML is used for element node
+// thanks :thumbsup:
+// https://stackoverflow.com/questions/123415/whats-the-difference-between-textcontent-and-innerhtml
+// https://developer.mozilla.org/en-US/docs/Web/API/TextNode
+// these links aren't working
+// https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+// yeah, this one works :thumbsup:
+// any other link?
+// https://stackoverflow.com/questions/123415/whats-the-difference-between-textcontent-and-innerhtml
+// oh god! this is an invalid link. I already told you.
