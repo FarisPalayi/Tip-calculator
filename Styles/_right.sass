@@ -7,23 +7,47 @@
   background-color: $verydarkCyan
   padding: 23px
   border-radius: 15px
+  width: calc(100vw - 67px)
 
   @include bp()
     margin: 0
+    width: auto
 
 .card__section__container
   @include flexbox(null, space-between)
   margin-bottom: 26px
 
 .card__section__container__amount
+  transition: background 200ms
+  scrollbar-width: thin
+  scrollbar-color: $strongCyan $verydarkCyan
 
   &::-webkit-scrollbar
-    width: 0
+    width: 5px
+    height: 5px
+
+  &::-webkit-scrollbar-thumb
+    background: darken($strongCyan, 10%)
+  
+  &:hover
+    scrollbar-color: cyan
+    &::-webkit-scrollbar-thumb
+      background: darken($strongCyan, 13%)
+
+  &:active,
+  &:focus
+    scrollbar-color: $strongCyan $verydarkCyan
+    
+    &::-webkit-scrollbar-thumb
+      background: darken($strongCyan, 18%)
+
 
   font-size: 1.95rem
   color: $strongCyan
-  max-width: 190px
   overflow-x: auto    
+
+  @include bp()
+    max-width: 190px
 
 .card__section__container__title
   max-width: 110px
@@ -32,6 +56,9 @@
     color: $lightGrayishCyan1
     font-weight: normal
     font-size: .8em
+
+
+// RESET BUTTON
 
 .card__section__reset-btn 
   @extend %btn
@@ -95,7 +122,7 @@
       transition: transform 34ms
 
   &:focus-visible
-    outline: revert
+    outline: $strongCyan ridge
 
   &--disabled
     > .card__section__reset-btn__front,
@@ -106,3 +133,6 @@
     &:hover
       > .card__section__reset-btn__front
         transform: translateY(-4px)
+
+    &:focus-visible
+      outline: transparent

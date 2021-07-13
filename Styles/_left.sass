@@ -24,10 +24,15 @@
   &__btn 
     font-size: 1.48rem
     background-color: $verydarkCyan
+    transition: background-color 210ms
     @extend %btn
 
     &:hover 
       background-color: $strongCyan
+
+    &:focus-visible
+      outline-offset: 3px
+      outline: $strongCyan solid 2px
     
     &--active 
       color: $verydarkCyan

@@ -170,6 +170,7 @@ input[type=number] {
   padding-right: 19px;
   background: var(--input_icon-path) no-repeat 20px;
   background-color: #f4fafa;
+  caret-color: #26c0ab;
 }
 input[type=number]:focus {
   border: 2px solid #26c0ab;
@@ -177,6 +178,12 @@ input[type=number]:focus {
 }
 input[type=number]:invalid {
   border-color: red;
+  caret-color: red;
+}
+
+::selection {
+  color: white;
+  background-color: rgba(38, 192, 171, 0.6);
 }
 
 .card__section--left {
@@ -205,9 +212,14 @@ input[type=number]:invalid {
 .card__section__btns-wrapper__btn {
   font-size: 1.48rem;
   background-color: #00494d;
+  transition: background-color 210ms;
 }
 .card__section__btns-wrapper__btn:hover {
   background-color: #26c0ab;
+}
+.card__section__btns-wrapper__btn:focus-visible {
+  outline-offset: 3px;
+  outline: #26c0ab solid 2px;
 }
 .card__section__btns-wrapper__btn--active {
   color: #00494d;
@@ -252,10 +264,12 @@ input[name=people] {
   background-color: #00494d;
   padding: 23px;
   border-radius: 15px;
+  width: calc(100vw - 67px);
 }
 @media screen and (min-width: 785px) {
   .card__section--right {
     margin: 0;
+    width: auto;
   }
 }
 
@@ -266,13 +280,36 @@ input[name=people] {
 }
 
 .card__section__container__amount {
+  transition: background 200ms;
+  scrollbar-width: thin;
+  scrollbar-color: #26c0ab #00494d;
   font-size: 1.95rem;
   color: #26c0ab;
-  max-width: 190px;
   overflow-x: auto;
 }
 .card__section__container__amount::-webkit-scrollbar {
-  width: 0;
+  width: 5px;
+  height: 5px;
+}
+.card__section__container__amount::-webkit-scrollbar-thumb {
+  background: #1d9585;
+}
+.card__section__container__amount:hover {
+  scrollbar-color: cyan;
+}
+.card__section__container__amount:hover::-webkit-scrollbar-thumb {
+  background: #1b887a;
+}
+.card__section__container__amount:active, .card__section__container__amount:focus {
+  scrollbar-color: #26c0ab #00494d;
+}
+.card__section__container__amount:active::-webkit-scrollbar-thumb, .card__section__container__amount:focus::-webkit-scrollbar-thumb {
+  background: #177367;
+}
+@media screen and (min-width: 785px) {
+  .card__section__container__amount {
+    max-width: 190px;
+  }
 }
 
 .card__section__container__title {
@@ -343,7 +380,7 @@ input[name=people] {
   transition: transform 34ms;
 }
 .card__section__reset-btn:focus-visible {
-  outline: revert;
+  outline: #26c0ab ridge;
 }
 .card__section__reset-btn--disabled > .card__section__reset-btn__front,
 .card__section__reset-btn--disabled > .card__section__reset-btn__edge {
@@ -352,6 +389,9 @@ input[name=people] {
 }
 .card__section__reset-btn--disabled:hover > .card__section__reset-btn__front {
   transform: translateY(-4px);
+}
+.card__section__reset-btn--disabled:focus-visible {
+  outline: transparent;
 }
 
 /*# sourceMappingURL=style.css.map */

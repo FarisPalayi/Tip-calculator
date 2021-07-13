@@ -176,7 +176,7 @@ function resetInputs(): void {
 }
 
 function disableResetBtnIfInputsAreInvalid(): void {
-  setTimeout(() => {
+  setTimeout((): void => {
     const isInputsAreInvalid: boolean = !isBillAmountValid() || !isTipAmountValid() || !isPeopleInputValid();
     resetBtn!.disabled = isInputsAreInvalid;
     if (isInputsAreInvalid) {

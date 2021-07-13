@@ -55,6 +55,7 @@ input[type="number"]
   padding-right: 19px
   background: var(--input_icon-path) no-repeat 20px
   background-color: #f4fafa
+  caret-color: $strongCyan
 
   &:focus 
     border: 2px solid $strongCyan
@@ -62,3 +63,8 @@ input[type="number"]
 
   &:invalid
     border-color: red
+    caret-color: red
+
+::selection
+  color: white
+  background-color: transparentize($strongCyan, .4%)
