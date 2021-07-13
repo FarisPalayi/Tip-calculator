@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "sass": "sass -w Styles/index.sass:style.css",
-    "ts": "tsc -w Script/index.ts"
+    "ts": "tsc -w"
   },
   "keywords": [],
   "author": "",

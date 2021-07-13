@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "rootDir": "./Script",
+    "outDir": "./Script/javascript",
+    "target": "ESNext",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "module": "AMD",
+    "outFile": "./Script/javascript/index.js",
+    "sourceMap": true
+  },
+}

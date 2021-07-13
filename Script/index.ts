@@ -238,3 +238,4 @@ function validatePeopleInput(): void {
 // yeah, this one works :thumbsup:
 // difference between aria-labelledby and aria-describedby
 // https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby
+

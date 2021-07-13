@@ -18,5 +18,5 @@ node_modules
 text.md
 .vercel
 .vercel.json
-*.map
 colors.scss
+demo
