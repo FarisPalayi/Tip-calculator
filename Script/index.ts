@@ -239,3 +239,13 @@ function validatePeopleInput(): void {
 // difference between aria-labelledby and aria-describedby
 // https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby
 
+import Animation from "./animations";
+
+const name : string = "fade-in";
+const duration : number = 0;
+const delay : number = 0;
+const easing : string = "ease-in";
+
+const animation = new Animation(name, duration, delay, easing);
+console.log(animation.toString())
+console.log(animation.clone().toString())
