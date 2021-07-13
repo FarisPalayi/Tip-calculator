@@ -15,7 +15,8 @@
 .DS_Store
 .prettierignore
 node_modules
-text.txt
+text.md
 .vercel
 .vercel.json
 *.map
+colors.scss

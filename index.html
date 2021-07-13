@@ -3,23 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
-
-    <title>Frontend Mentor | Tip calculator app</title>
-
+    <meta name="description" content="Calculate how much tip you pay using this calculator">
+    <meta name="author" content="Faris P" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+    <title>Tip calculator app</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <script src="./Script/index.js" defer></script>
 
     <style>
@@ -45,9 +36,9 @@
           name="bill"
           id="bill"
           class="card__section__bill-input"
-          value="100"
           placeholder="0"
           min="0"
+          step="any"
           required
         />
         <p class="card__section__tip-title">Select Tip %</p>
@@ -63,18 +54,20 @@
             name="custom"
             id="custom"
             placeholder="Custom"
-            aria-label="add custom tip amount (in percents)"
+            aria-label="add custom tip amount (in percent)"
             min="0"
+            step="any"
           />
         </div>
-        <label for="people" class="card__section__label card__section__label--people">Number of People</label>
-        <span class="card__section__error" aria-hidden="true">Can't be zero</span>
+        <div class="error-wrapper">
+          <label for="people" class="card__section__label card__section__label--people">Number of People</label>
+          <span class="card__section__error" role="alert">Can't be zero</span>
+        </div>
         <input
           type="number"
           name="people"
           id="people"
           class="card__section--left__people-input"
-          value="1"
           placeholder="0"
           min="0"
           required
@@ -83,15 +76,13 @@
 
       <section class="card__section card__section--right">
         <div>
-          <!-- prettier-ignore -->
           <div class="card__section__container card__section__container--tip">
             <p class="card__section__container__title" id="tip-amount">Tip Amount<span>/ person</span></p>
-            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="tip-amount">$4.27</span>
+            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="tip-amount" aria-atomic="true">$4.27</span>
           </div>
-          <!-- prettier-ignore -->
           <div class="card__section__container card__section__container--total">
             <p class="card__section__container__title" id="total-person">Total<span>/ person</span></p>
-            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="total-person">$32.79</span>
+            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="total-person" aria-atomic="true">$32.79</span>
           </div>
         </div>
         <button class="card__section__reset-btn">
@@ -107,7 +98,7 @@
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
           >Frontend Mentor</a
-        >. Coded by <a href="#">Faris P</a>.
+        >. Coded by <a href="https://www.frontendmentor.io/profile/FarisPalayi">Faris P</a>.
       </div>
     </footer>
   </body>

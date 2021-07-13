@@ -17,12 +17,12 @@ const customTipPercentInput: HTMLInputElement | null = document.querySelector('i
 // -------------------------
 // global variables
 
-let bill: number = parseFloat(billInput!.value) || 0;
+let bill: number = parseFloat(billInput!.value);
 let tipInPercent: number = .15; // initial value
-let people: number = parseInt(peopleInput!.value) || 1;
+let people: number = parseInt(peopleInput!.value);
 
 // -------------------------
-// updagte variable values
+// update variable values
 
 function updateBill(): void {
   bill = parseFloat(billInput!.value) || 0;
@@ -92,7 +92,6 @@ function isBillAmountValid(): boolean {
   const calculatedTotalBillAmount: number = calculateTotalBillPerPerson();
   return !isNaN(calculatedTotalBillAmount) && isFinite(calculatedTotalBillAmount) && calculatedTotalBillAmount > 0;
 }
-
 // show total bill
 
 function showTotalBillPerPerson(): void {
@@ -125,6 +124,7 @@ billInput?.addEventListener('input', (): void => {
   updateBill();
   showTipPerPerson();
   showTotalBillPerPerson();
+  disableResetBtnIfInputsAreInvalid();
 });
 
 billPercentBtns?.forEach((percentBtn: HTMLButtonElement): void => {
@@ -134,6 +134,7 @@ billPercentBtns?.forEach((percentBtn: HTMLButtonElement): void => {
     showTotalBillPerPerson();
     removeBtnActive();
     setBtnActive(percentBtn, true);
+    disableResetBtnIfInputsAreInvalid();
   });
 });
 
@@ -142,6 +143,7 @@ customTipPercentInput?.addEventListener('input', (): void => {
   showTipPerPerson();
   showTotalBillPerPerson();
   removeBtnActive();
+  disableResetBtnIfInputsAreInvalid();
 });
 
 peopleInput?.addEventListener('input', (): void => {
@@ -149,41 +151,61 @@ peopleInput?.addEventListener('input', (): void => {
   showTipPerPerson();
   showTotalBillPerPerson();
   validatePeopleInput();
+  disableResetBtnIfInputsAreInvalid();
 });
 
 // -------------------------
 // resets the inputs
 
-const reset: HTMLButtonElement | null = document.querySelector('.card__section__reset-btn');
+const resetBtn: HTMLButtonElement | null = document.querySelector('.card__section__reset-btn');
 
-reset?.addEventListener('click', resetInputs);
+resetBtn?.addEventListener('click', resetInputs);
 
 function resetInputs(): void {
   billInput!.value = '0';
   peopleInput!.value = '1';
-  customTipPercentInput!.value = '0';
+  customTipPercentInput!.value = '';
   tipAmountElm!.innerHTML = '$0.00';
   totalBillElm!.innerHTML = '$0.00';
+  tipInPercent = 0;
+  updateBill();
+  updatePeople();
   hideErrorMsg();
+  removeBtnActive();
+  disableResetBtnIfInputsAreInvalid();
 }
+
+function disableResetBtnIfInputsAreInvalid(): void {
+  setTimeout(() => {
+    const isInputsAreInvalid: boolean = !isBillAmountValid() || !isTipAmountValid() || !isPeopleInputValid();
+    resetBtn!.disabled = isInputsAreInvalid;
+    if (isInputsAreInvalid) {
+      resetBtn?.classList.add('card__section__reset-btn--disabled');
+    } else {
+      resetBtn?.classList.remove('card__section__reset-btn--disabled');
+    }    
+  }, 200); // to give btn disabling and style changes a bit delay
+}
+
+disableResetBtnIfInputsAreInvalid();
 
 // -------------------------
 // validate the people input
 
 const errorElm: HTMLSpanElement | null = document.querySelector('.card__section__error');
 
-function isPeopleInuputValild(): boolean {
+function isPeopleInputValid(): boolean {
   const peopleInputAsANumber: number = parseInt(peopleInput!.value);
   return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
 }
 
 function showErrorMsg(): void {
-  errorElm?.setAttribute('aria-hidden', 'false');
+  errorElm!.style.display = 'block';
   errorElm?.classList.add('card__section__error--visible');
 }
 
 function hideErrorMsg(): void {
-  errorElm?.setAttribute('aria-hidden', 'true');
+  errorElm!.style.display = 'none';
   errorElm?.classList.remove('card__section__error--visible');
 }
 
@@ -196,12 +218,12 @@ function setPeopleInputInvalid(): void {
 }
 
 function validatePeopleInput(): void {
-  if (isPeopleInuputValild()) {
+  if (isPeopleInputValid()) {
     hideErrorMsg();
-    setPeopleInputValid()
+    setPeopleInputValid();
   } else {
     showErrorMsg();
-    setPeopleInputInvalid()
+    setPeopleInputInvalid();
   }
 }
 
@@ -214,6 +236,5 @@ function validatePeopleInput(): void {
 // these links aren't working
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 // yeah, this one works :thumbsup:
-// any other link?
-// https://stackoverflow.com/questions/123415/whats-the-difference-between-textcontent-and-innerhtml
-// oh god! this is an invalid link. I already told you.
+// difference between aria-labelledby and aria-describedby
+// https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby

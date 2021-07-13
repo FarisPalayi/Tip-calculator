@@ -43,7 +43,8 @@ input[name="custom"]
   &::placeholder
     color: $darkGrayishCyan2
 
-.card__section__label--people 
+.error-wrapper
+  @include flexbox(null, space-between)
   margin-top: 30px
   margin-bottom: 2px
 
@@ -56,3 +57,4 @@ input[name="people"]
 
   &--visible
     opacity: 1
+

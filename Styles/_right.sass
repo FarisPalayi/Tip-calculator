@@ -63,9 +63,9 @@
     left: 0
     width: 100%
     height: 100%
-    background-color: hsl(180, 100, 27%)
+    background-color: hsl(180, 100%, 27%)
     border-radius: inherit
-    background: linear-gradient(to left, hsl(180, 100, 20%) 0%, hsl(180, 100, 26%) 8%, hsl(180, 100, 26%) 92%, hsl(180, 100, 20%) 100%)
+    background: linear-gradient(to left, hsl(180, 100%, 20%) 0%, hsl(180, 100%, 26%) 8%, hsl(180, 100%, 26%) 92%, hsl(180, 100%, 20%) 100%)
 
   > .card__section__reset-btn__front
     position: relative
@@ -96,3 +96,13 @@
 
   &:focus-visible
     outline: revert
+
+  &--disabled
+    > .card__section__reset-btn__front,
+    > .card__section__reset-btn__edge
+      cursor: not-allowed
+      background: #0D686D
+
+    &:hover
+      > .card__section__reset-btn__front
+        transform: translateY(-4px)

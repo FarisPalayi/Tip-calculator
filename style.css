@@ -225,7 +225,9 @@ input[name=custom]::placeholder {
   color: #7f9c9f;
 }
 
-.card__section__label--people {
+.error-wrapper {
+  display: flex;
+  justify-content: space-between;
   margin-top: 30px;
   margin-bottom: 2px;
 }
@@ -342,6 +344,14 @@ input[name=people] {
 }
 .card__section__reset-btn:focus-visible {
   outline: revert;
+}
+.card__section__reset-btn--disabled > .card__section__reset-btn__front,
+.card__section__reset-btn--disabled > .card__section__reset-btn__edge {
+  cursor: not-allowed;
+  background: #0D686D;
+}
+.card__section__reset-btn--disabled:hover > .card__section__reset-btn__front {
+  transform: translateY(-4px);
 }
 
 /*# sourceMappingURL=style.css.map */
