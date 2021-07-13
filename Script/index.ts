@@ -122,9 +122,16 @@ function removeBtnActive(): void {
 
 billInput?.addEventListener('input', (): void => {
   updateBill();
-  showTipPerPerson();
-  showTotalBillPerPerson();
   disableResetBtnIfInputsAreInvalid();
+})
+
+billInput?.addEventListener('keydown', (event: KeyboardEvent): void => {
+  if (event.key === 'Enter') {
+    updateBill();
+    showTipPerPerson();
+    showTotalBillPerPerson();
+    disableResetBtnIfInputsAreInvalid();
+  }
 });
 
 billPercentBtns?.forEach((percentBtn: HTMLButtonElement): void => {
@@ -138,20 +145,36 @@ billPercentBtns?.forEach((percentBtn: HTMLButtonElement): void => {
   });
 });
 
-customTipPercentInput?.addEventListener('input', (): void => {
+customTipPercentInput?.addEventListener('input', (event: Event): void => {
   updateCustomTipPercent();
-  showTipPerPerson();
-  showTotalBillPerPerson();
   removeBtnActive();
   disableResetBtnIfInputsAreInvalid();
+})
+
+customTipPercentInput?.addEventListener('keydown', (event: KeyboardEvent): void => {
+  if (event.key === 'Enter') {
+    updateCustomTipPercent();
+    showTipPerPerson();
+    showTotalBillPerPerson();
+    removeBtnActive();
+    disableResetBtnIfInputsAreInvalid();
+  }
 });
 
-peopleInput?.addEventListener('input', (): void => {
+peopleInput?.addEventListener('input', (event: Event): void => {
   updatePeople();
-  showTipPerPerson();
-  showTotalBillPerPerson();
   validatePeopleInput();
   disableResetBtnIfInputsAreInvalid();
+})
+
+peopleInput?.addEventListener('keydown', (event: KeyboardEvent): void => {
+  if (event.key === 'Enter') {
+    updatePeople();
+    showTipPerPerson();
+    showTotalBillPerPerson();
+    validatePeopleInput();
+    disableResetBtnIfInputsAreInvalid();
+  }
 });
 
 // -------------------------
@@ -249,3 +272,5 @@ const easing : string = "ease-in";
 const animation = new Animation(name, duration, delay, easing);
 console.log(animation.toString())
 console.log(animation.clone().toString())
+
+//! TODO : add transition changes to reset button disabling

@@ -170,9 +170,15 @@ define("index", ["require", "exports", "animations"], function (require, exports
     }
     billInput?.addEventListener('input', () => {
         updateBill();
-        showTipPerPerson();
-        showTotalBillPerPerson();
         disableResetBtnIfInputsAreInvalid();
+    });
+    billInput?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            updateBill();
+            showTipPerPerson();
+            showTotalBillPerPerson();
+            disableResetBtnIfInputsAreInvalid();
+        }
     });
     billPercentBtns?.forEach((percentBtn) => {
         percentBtn.addEventListener('click', (event) => {
@@ -184,19 +190,33 @@ define("index", ["require", "exports", "animations"], function (require, exports
             disableResetBtnIfInputsAreInvalid();
         });
     });
-    customTipPercentInput?.addEventListener('input', () => {
+    customTipPercentInput?.addEventListener('input', (event) => {
         updateCustomTipPercent();
-        showTipPerPerson();
-        showTotalBillPerPerson();
         removeBtnActive();
         disableResetBtnIfInputsAreInvalid();
     });
-    peopleInput?.addEventListener('input', () => {
+    customTipPercentInput?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            updateCustomTipPercent();
+            showTipPerPerson();
+            showTotalBillPerPerson();
+            removeBtnActive();
+            disableResetBtnIfInputsAreInvalid();
+        }
+    });
+    peopleInput?.addEventListener('input', (event) => {
         updatePeople();
-        showTipPerPerson();
-        showTotalBillPerPerson();
         validatePeopleInput();
         disableResetBtnIfInputsAreInvalid();
+    });
+    peopleInput?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            updatePeople();
+            showTipPerPerson();
+            showTotalBillPerPerson();
+            validatePeopleInput();
+            disableResetBtnIfInputsAreInvalid();
+        }
     });
     const resetBtn = document.querySelector('.card__section__reset-btn');
     resetBtn?.addEventListener('click', resetInputs);
