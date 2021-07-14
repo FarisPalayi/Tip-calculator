@@ -116,7 +116,6 @@ html {
 body {
   margin: 0;
   background-color: #c5e4e7;
-  min-height: 100vh;
 }
 
 header {
@@ -249,16 +248,47 @@ header > h1 {
 }
 
 .card__section__container__title {
-  max-width: 110px;
+  max-width: 100px;
 }
-.card__section__container__title > span {
+.card__section__container__title > span:first-of-type {
+  white-space: nowrap;
+}
+.card__section__container__title > span:last-of-type {
   color: #c5e4e7;
   font-weight: normal;
   font-size: 0.8em;
 }
 
-:root {
-  --input_icon-path: url(../images/icon-dollar.svg);
+.card__section__input-wrapper {
+  position: relative;
+  margin: 5px 0;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.card__section__input-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(100% - (2px * 2));
+  width: 46px;
+  background: #f4fafa;
+  border-radius: 4px 0 0 4px;
+}
+.card__section__input-wrapper::after {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  height: 18px;
+  transform: translateY(-50%);
+}
+
+.card__section__input-wrapper--bill::after {
+  content: url(../images/icon-dollar.svg);
+}
+
+.card__section__input-wrapper--people::after {
+  content: url(../images/icon-person.svg);
 }
 
 input[type=number] {
@@ -266,12 +296,10 @@ input[type=number] {
   color: #00494d;
   height: 46px;
   border: none;
-  margin: 5px 0;
   border-radius: 5px;
   text-align: right;
   font-size: 1.5rem;
   padding-right: 19px;
-  background: var(--input_icon-path) no-repeat 20px;
   background-color: #f4fafa;
   caret-color: #26c0ab;
 }
@@ -288,15 +316,10 @@ input[name=custom] {
   --input_icon-path: none;
   background-color: inherit;
   text-align: center;
-  margin: 0;
   padding: 0;
 }
 input[name=custom]::placeholder {
   color: #7f9c9f;
-}
-
-input[name=people] {
-  --input_icon-path: url(../images/icon-person.svg);
 }
 
 .card__section__reset-btn {

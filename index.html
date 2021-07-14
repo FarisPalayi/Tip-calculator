@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <title>Tip calculator app</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preload" href="./images/icon-person.svg" as="image">
+    <link rel="preload" href="./images/icon-dollar.svg" as="image">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -36,12 +38,11 @@
     <main class="card">
       <section class="card__section card__section--left">
         <label for="bill" class="card__section__label">Bill</label>
-        <div>
+        <div class="card__section__input-wrapper card__section__input-wrapper--bill">
           <input
             type="number"
             name="bill"
             id="bill"
-            class="card__section__bill-input"
             placeholder="0"
             min="0"
             step="any"
@@ -57,7 +58,6 @@
           <button class="card__section__btns-wrapper__btn" data-percent="50"> 50%</button>
           <input
             type="number"
-            class="card__section__btns-wrapper__input"
             name="custom"
             id="custom"
             placeholder="Custom"
@@ -70,25 +70,26 @@
           <label for="people" class="card__section__label card__section__label--people">Number of People</label>
           <span class="card__section__error" role="alert">Can't be zero</span>
         </div>
-        <input
-          type="number"
-          name="people"
-          id="people"
-          class="card__section--left__people-input"
-          placeholder="0"
-          min="0"
-          required
-        />
+        <div class="card__section__input-wrapper card__section__input-wrapper--people">
+          <input
+            type="number"
+            name="people"
+            id="people"
+            placeholder="0"
+            min="0"
+            required
+          />
+        </div>
       </section>
 
       <section class="card__section card__section--right">
         <div>
           <div class="card__section__container card__section__container--tip">
-            <p class="card__section__container__title" id="tip-amount">Tip Amount<span>/ person</span></p>
+            <p class="card__section__container__title" id="tip-amount"><span>Tip Amount</span><span>/ person</span></p>
             <span class="card__section__container__amount" aria-live="polite" aria-labelledby="tip-amount" aria-atomic="true">$4.27</span>
           </div>
           <div class="card__section__container card__section__container--total">
-            <p class="card__section__container__title" id="total-person">Total<span>/ person</span></p>
+            <p class="card__section__container__title" id="total-person"><span>Total</span><span>/ person</span></p>
             <span class="card__section__container__amount" aria-live="polite" aria-labelledby="total-person" aria-atomic="true">$32.79</span>
           </div>
         </div>

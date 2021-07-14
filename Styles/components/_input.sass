@@ -1,7 +1,36 @@
 @use '../abstract' as *
 
-:root
-  --input_icon-path: url(../images/icon-dollar.svg)
+// :root
+//   --input_icon-path: url(../images/icon-dollar.svg)
+
+.card__section__input-wrapper 
+  position: relative
+  margin: 5px 0
+  overflow: hidden
+  border-radius: 5px
+
+  &::before
+    content: ''
+    position: absolute
+    top: 2px // outline width is 2px
+    left: 2px
+    height: calc(100% - (2px * 2))
+    width: 46px
+    background: #f4fafa
+    border-radius: 4px 0 0 4px
+
+  &::after
+    position: absolute
+    top: 50%
+    left: 20px
+    height: 18px
+    transform: translateY(-50%)
+
+.card__section__input-wrapper--bill::after
+  content: url(../images/icon-dollar.svg)
+
+.card__section__input-wrapper--people::after
+  content: url(../images/icon-person.svg)
 
 // common styles
 
@@ -10,12 +39,11 @@ input[type="number"]
   color: $verydarkCyan
   height: 46px
   border: none
-  margin: 5px 0
   border-radius: 5px
   text-align: right
   font-size: 1.5rem
   padding-right: 19px
-  background: var(--input_icon-path) no-repeat 20px
+  // background: var(--input_icon-path) no-repeat 20px
   background-color: #f4fafa
   caret-color: $strongCyan
 
@@ -33,11 +61,10 @@ input[name="custom"]
   --input_icon-path: none
   background-color: inherit
   text-align: center
-  margin: 0
   padding: 0
 
   &::placeholder
     color: $darkGrayishCyan2
 
 input[name="people"] 
-  --input_icon-path: url(../images/icon-person.svg)
+  // --input_icon-path: url(../images/icon-person.svg)
