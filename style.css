@@ -118,6 +118,11 @@ body {
   background-color: #c5e4e7;
 }
 
+a:focus-visible {
+  outline-offset: 3px;
+  outline: #26c0ab solid 2px;
+}
+
 header {
   font-size: 0.74rem;
   height: 144px;
@@ -384,7 +389,7 @@ input[name=custom]::placeholder {
   transition: transform 34ms;
 }
 .card__section__reset-btn:focus-visible {
-  outline: #26c0ab ridge;
+  outline: #26c0ab ridge 3px;
 }
 
 .card__section__reset-btn--disabled > .card__section__reset-btn__front,

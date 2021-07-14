@@ -11,6 +11,10 @@ body
   margin: 0
   background-color: $lightGrayishCyan1
 
+a:focus-visible
+  outline-offset: 3px
+  outline: $strongCyan solid 2px
+
 header 
   @extend %grid-center
   font-size: 0.74rem
@@ -38,7 +42,7 @@ header
   align-self: start
   box-shadow: 1px 1px 14px 0px #3e3e3e05, 10px 50px 200px 0px #26262608
 
-  @include bp() 
+  @include bp
     @include flexbox(null, null, null, 25px)
     border-radius: 26px
     max-height: 480px

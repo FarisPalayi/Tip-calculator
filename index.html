@@ -16,13 +16,9 @@
     <script data-main="./Script/javascript/config" src="./Script/javascript/requirejs_2.3.6.js"></script>
 
     <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
+      .attribution { font-size: 11px; text-align: center; color: #008b8b; display: none }
+      .attribution a { color: #3e52a3 }
+      @media screen and (min-height: 850px) and (min-width: 1200px) { .attribution { display: block } }
     </style>
   </head>
   <body>
@@ -39,15 +35,7 @@
       <section class="card__section card__section--left">
         <label for="bill" class="card__section__label">Bill</label>
         <div class="card__section__input-wrapper card__section__input-wrapper--bill">
-          <input
-            type="number"
-            name="bill"
-            id="bill"
-            placeholder="0"
-            min="0"
-            step="any"
-            required
-          />
+          <input type="number" name="bill" id="bill" placeholder="0" min="0" step="any" required />
         </div>
         <p class="card__section__tip-title">Select Tip %</p>
         <div class="card__section__btns-wrapper">
@@ -56,29 +44,14 @@
           <button class="card__section__btns-wrapper__btn card__section__btns-wrapper__btn--active" data-percent="15">15%</button>
           <button class="card__section__btns-wrapper__btn" data-percent="25">25%</button>
           <button class="card__section__btns-wrapper__btn" data-percent="50"> 50%</button>
-          <input
-            type="number"
-            name="custom"
-            id="custom"
-            placeholder="Custom"
-            aria-label="add custom tip amount (in percent)"
-            min="0"
-            step="any"
-          />
+          <input type="number" name="custom" id="custom" placeholder="Custom" aria-label="add custom tip amount (in percent)" min="0" step="any" />
         </div>
         <div class="error-wrapper">
           <label for="people" class="card__section__label card__section__label--people">Number of People</label>
           <span class="card__section__error" role="alert">Can't be zero</span>
         </div>
         <div class="card__section__input-wrapper card__section__input-wrapper--people">
-          <input
-            type="number"
-            name="people"
-            id="people"
-            placeholder="0"
-            min="0"
-            required
-          />
+          <input type="number" name="people" id="people" placeholder="0" min="0" required />
         </div>
       </section>
 
@@ -101,7 +74,7 @@
       </section>
     </main>
 
-    <footer hidden>
+    <footer >
       <div class="attribution">
         Challenge by
         <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
