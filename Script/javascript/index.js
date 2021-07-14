@@ -168,6 +168,35 @@ define("index", ["require", "exports", "animations"], function (require, exports
             setBtnActive(percentBtn, false);
         });
     }
+    const errorElm = document.querySelector('.card__section__error');
+    function isPeopleInputValid() {
+        const peopleInputAsANumber = parseInt(peopleInput.value);
+        return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
+    }
+    function showErrorMsg() {
+        errorElm.style.display = 'block';
+        errorElm?.classList.add('card__section__error--visible');
+    }
+    function hideErrorMsg() {
+        errorElm.style.display = 'none';
+        errorElm?.classList.remove('card__section__error--visible');
+    }
+    function setPeopleInputValid() {
+        peopleInput?.setCustomValidity('');
+    }
+    function setPeopleInputInvalid() {
+        peopleInput?.setCustomValidity('Please enter a number greater than 0');
+    }
+    function validatePeopleInput() {
+        if (isPeopleInputValid()) {
+            hideErrorMsg();
+            setPeopleInputValid();
+        }
+        else {
+            showErrorMsg();
+            setPeopleInputInvalid();
+        }
+    }
     billInput?.addEventListener('input', () => {
         updateBill();
         disableResetBtnIfInputsAreInvalid();
@@ -246,35 +275,6 @@ define("index", ["require", "exports", "animations"], function (require, exports
         }, 200);
     }
     disableResetBtnIfInputsAreInvalid();
-    const errorElm = document.querySelector('.card__section__error');
-    function isPeopleInputValid() {
-        const peopleInputAsANumber = parseInt(peopleInput.value);
-        return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
-    }
-    function showErrorMsg() {
-        errorElm.style.display = 'block';
-        errorElm?.classList.add('card__section__error--visible');
-    }
-    function hideErrorMsg() {
-        errorElm.style.display = 'none';
-        errorElm?.classList.remove('card__section__error--visible');
-    }
-    function setPeopleInputValid() {
-        peopleInput?.setCustomValidity('');
-    }
-    function setPeopleInputInvalid() {
-        peopleInput?.setCustomValidity('Please enter a number greater than 0');
-    }
-    function validatePeopleInput() {
-        if (isPeopleInputValid()) {
-            hideErrorMsg();
-            setPeopleInputValid();
-        }
-        else {
-            showErrorMsg();
-            setPeopleInputInvalid();
-        }
-    }
     const name = "fade-in";
     const duration = 0;
     const delay = 0;

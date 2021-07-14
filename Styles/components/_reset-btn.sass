@@ -1,64 +1,4 @@
-
-@use 'abstract' as *
-
-.card__section--right 
-  @include flexbox(col, space-between)
-  margin: 27px 0
-  background-color: $verydarkCyan
-  padding: 23px
-  border-radius: 15px
-  width: calc(100vw - 67px)
-
-  @include bp()
-    margin: 0
-    width: auto
-
-.card__section__container
-  @include flexbox(null, space-between)
-  margin-bottom: 26px
-
-.card__section__container__amount
-  transition: background 200ms
-  scrollbar-width: thin
-  scrollbar-color: $strongCyan $verydarkCyan
-
-  &::-webkit-scrollbar
-    width: 5px
-    height: 5px
-
-  &::-webkit-scrollbar-thumb
-    background: darken($strongCyan, 10%)
-  
-  &:hover
-    scrollbar-color: cyan
-    &::-webkit-scrollbar-thumb
-      background: darken($strongCyan, 13%)
-
-  &:active,
-  &:focus
-    scrollbar-color: $strongCyan $verydarkCyan
-    
-    &::-webkit-scrollbar-thumb
-      background: darken($strongCyan, 18%)
-
-
-  font-size: 1.95rem
-  color: $strongCyan
-  overflow-x: auto    
-
-  @include bp()
-    max-width: 190px
-
-.card__section__container__title
-  max-width: 110px
-  
-  > span
-    color: $lightGrayishCyan1
-    font-weight: normal
-    font-size: .8em
-
-
-// RESET BUTTON
+@use '../abstract' as *
 
 .card__section__reset-btn 
   @extend %btn
@@ -72,6 +12,9 @@
   outline: transparent
   transform: translateY(-6px)
   transition: color 200ms, background-color 200ms
+
+  > *
+    transition: background 200ms, color 200ms
 
   > .card__section__reset-btn__shadow
     position: absolute
@@ -124,15 +67,18 @@
   &:focus-visible
     outline: $strongCyan ridge
 
-  &--disabled
-    > .card__section__reset-btn__front,
-    > .card__section__reset-btn__edge
-      cursor: not-allowed
-      background: #0D686D
+// when button is disabled
 
-    &:hover
-      > .card__section__reset-btn__front
-        transform: translateY(-4px)
+.card__section__reset-btn--disabled
 
-    &:focus-visible
-      outline: transparent
+  > .card__section__reset-btn__front,
+  > .card__section__reset-btn__edge
+    cursor: not-allowed
+    background: #0D686D
+
+  &:hover
+    > .card__section__reset-btn__front
+      transform: translateY(-4px)
+
+  &:focus-visible
+    outline: transparent

@@ -1,5 +1,4 @@
-
-@use 'abstract' as *
+@use '../abstract' as *
 
 .card__section--left 
   padding: 0 6px
@@ -24,7 +23,7 @@
   &__btn 
     font-size: 1.48rem
     background-color: $verydarkCyan
-    transition: background-color 210ms
+    transition: background-color 210ms, color 100ms
     @extend %btn
 
     &:hover 
@@ -38,23 +37,10 @@
       color: $verydarkCyan
       background-color: $strongCyan
 
-input[name="custom"]
-  --input_icon-path: none
-  background-color: inherit
-  text-align: center
-  margin: 0
-  padding: 0
-
-  &::placeholder
-    color: $darkGrayishCyan2
-
 .error-wrapper
   @include flexbox(null, space-between)
   margin-top: 30px
   margin-bottom: 2px
-
-input[name="people"] 
-  --input_icon-path: url(../images/icon-person.svg)
 
 .card__section__error
   opacity: 0

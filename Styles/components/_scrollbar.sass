@@ -1,0 +1,25 @@
+@use '../abstract' as *
+
+.card__section__container__amount
+  transition: background 200ms
+  scrollbar-width: thin
+  scrollbar-color: $strongCyan $verydarkCyan
+
+  &::-webkit-scrollbar
+    width: 5px
+    height: 5px
+
+  &::-webkit-scrollbar-thumb
+    background: darken($strongCyan, 10%)
+  
+  &:hover
+    scrollbar-color: cyan
+    &::-webkit-scrollbar-thumb
+      background: darken($strongCyan, 13%)
+
+  &:active,
+  &:focus
+    scrollbar-color: $strongCyan $verydarkCyan
+    
+    &::-webkit-scrollbar-thumb
+      background: darken($strongCyan, 18%)

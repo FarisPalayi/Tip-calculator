@@ -118,6 +118,44 @@ function removeBtnActive(): void {
 }
 
 // -------------------------
+// validate the people input
+
+const errorElm: HTMLSpanElement | null = document.querySelector('.card__section__error');
+
+function isPeopleInputValid(): boolean {
+  const peopleInputAsANumber: number = parseInt(peopleInput!.value);
+  return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
+}
+
+function showErrorMsg(): void {
+  errorElm!.style.display = 'block';
+  errorElm?.classList.add('card__section__error--visible');
+}
+
+function hideErrorMsg(): void {
+  errorElm!.style.display = 'none';
+  errorElm?.classList.remove('card__section__error--visible');
+}
+
+function setPeopleInputValid(): void {
+  peopleInput?.setCustomValidity('');
+}
+
+function setPeopleInputInvalid(): void {
+  peopleInput?.setCustomValidity('Please enter a number greater than 0');
+}
+
+function validatePeopleInput(): void {
+  if (isPeopleInputValid()) {
+    hideErrorMsg();
+    setPeopleInputValid();
+  } else {
+    showErrorMsg();
+    setPeopleInputInvalid();
+  }
+}
+
+// -------------------------
 // event listeners
 
 billInput?.addEventListener('input', (): void => {
@@ -163,7 +201,7 @@ customTipPercentInput?.addEventListener('keydown', (event: KeyboardEvent): void 
 
 peopleInput?.addEventListener('input', (event: Event): void => {
   updatePeople();
-  validatePeopleInput();
+  validatePeopleInput(); // to show error if invalid
   disableResetBtnIfInputsAreInvalid();
 })
 
@@ -211,44 +249,6 @@ function disableResetBtnIfInputsAreInvalid(): void {
 }
 
 disableResetBtnIfInputsAreInvalid();
-
-// -------------------------
-// validate the people input
-
-const errorElm: HTMLSpanElement | null = document.querySelector('.card__section__error');
-
-function isPeopleInputValid(): boolean {
-  const peopleInputAsANumber: number = parseInt(peopleInput!.value);
-  return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
-}
-
-function showErrorMsg(): void {
-  errorElm!.style.display = 'block';
-  errorElm?.classList.add('card__section__error--visible');
-}
-
-function hideErrorMsg(): void {
-  errorElm!.style.display = 'none';
-  errorElm?.classList.remove('card__section__error--visible');
-}
-
-function setPeopleInputValid(): void {
-  peopleInput?.setCustomValidity('');
-}
-
-function setPeopleInputInvalid(): void {
-  peopleInput?.setCustomValidity('Please enter a number greater than 0');
-}
-
-function validatePeopleInput(): void {
-  if (isPeopleInputValid()) {
-    hideErrorMsg();
-    setPeopleInputValid();
-  } else {
-    showErrorMsg();
-    setPeopleInputInvalid();
-  }
-}
 
 // difference between textContent and innerHTML
 // textContent is used for text node

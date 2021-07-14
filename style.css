@@ -94,10 +94,6 @@ br {
     scroll-behavior: auto !important;
   }
 }
-:root {
-  --input_icon-path: url(../images/icon-dollar.svg);
-}
-
 .card__section__reset-btn, .card__section__btns-wrapper__btn {
   border-radius: 6px;
   border: none;
@@ -136,6 +132,11 @@ header > h1 {
   padding-left: 11px;
 }
 
+::selection {
+  color: white;
+  background-color: rgba(38, 192, 171, 0.6);
+}
+
 .card {
   width: 100%;
   margin: 0 auto;
@@ -156,34 +157,6 @@ header > h1 {
 }
 .card > * {
   flex-basis: 100%;
-}
-
-input[type=number] {
-  width: 100%;
-  color: #00494d;
-  height: 46px;
-  border: none;
-  margin: 5px 0;
-  border-radius: 5px;
-  text-align: right;
-  font-size: 1.5rem;
-  padding-right: 19px;
-  background: var(--input_icon-path) no-repeat 20px;
-  background-color: #f4fafa;
-  caret-color: #26c0ab;
-}
-input[type=number]:focus {
-  border: 2px solid #26c0ab;
-  outline: transparent 2px solid;
-}
-input[type=number]:invalid {
-  border-color: red;
-  caret-color: red;
-}
-
-::selection {
-  color: white;
-  background-color: rgba(38, 192, 171, 0.6);
 }
 
 .card__section--left {
@@ -212,7 +185,7 @@ input[type=number]:invalid {
 .card__section__btns-wrapper__btn {
   font-size: 1.48rem;
   background-color: #00494d;
-  transition: background-color 210ms;
+  transition: background-color 210ms, color 100ms;
 }
 .card__section__btns-wrapper__btn:hover {
   background-color: #26c0ab;
@@ -226,26 +199,11 @@ input[type=number]:invalid {
   background-color: #26c0ab;
 }
 
-input[name=custom] {
-  --input_icon-path: none;
-  background-color: inherit;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-input[name=custom]::placeholder {
-  color: #7f9c9f;
-}
-
 .error-wrapper {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
   margin-bottom: 2px;
-}
-
-input[name=people] {
-  --input_icon-path: url(../images/icon-person.svg);
 }
 
 .card__section__error {
@@ -280,31 +238,9 @@ input[name=people] {
 }
 
 .card__section__container__amount {
-  transition: background 200ms;
-  scrollbar-width: thin;
-  scrollbar-color: #26c0ab #00494d;
   font-size: 1.95rem;
   color: #26c0ab;
   overflow-x: auto;
-}
-.card__section__container__amount::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-.card__section__container__amount::-webkit-scrollbar-thumb {
-  background: #1d9585;
-}
-.card__section__container__amount:hover {
-  scrollbar-color: cyan;
-}
-.card__section__container__amount:hover::-webkit-scrollbar-thumb {
-  background: #1b887a;
-}
-.card__section__container__amount:active, .card__section__container__amount:focus {
-  scrollbar-color: #26c0ab #00494d;
-}
-.card__section__container__amount:active::-webkit-scrollbar-thumb, .card__section__container__amount:focus::-webkit-scrollbar-thumb {
-  background: #177367;
 }
 @media screen and (min-width: 785px) {
   .card__section__container__amount {
@@ -321,6 +257,48 @@ input[name=people] {
   font-size: 0.8em;
 }
 
+:root {
+  --input_icon-path: url(../images/icon-dollar.svg);
+}
+
+input[type=number] {
+  width: 100%;
+  color: #00494d;
+  height: 46px;
+  border: none;
+  margin: 5px 0;
+  border-radius: 5px;
+  text-align: right;
+  font-size: 1.5rem;
+  padding-right: 19px;
+  background: var(--input_icon-path) no-repeat 20px;
+  background-color: #f4fafa;
+  caret-color: #26c0ab;
+}
+input[type=number]:focus {
+  border: 2px solid #26c0ab;
+  outline: transparent 2px solid;
+}
+input[type=number]:invalid {
+  border-color: red;
+  caret-color: red;
+}
+
+input[name=custom] {
+  --input_icon-path: none;
+  background-color: inherit;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+input[name=custom]::placeholder {
+  color: #7f9c9f;
+}
+
+input[name=people] {
+  --input_icon-path: url(../images/icon-person.svg);
+}
+
 .card__section__reset-btn {
   position: relative;
   padding: 0;
@@ -332,6 +310,9 @@ input[name=people] {
   outline: transparent;
   transform: translateY(-6px);
   transition: color 200ms, background-color 200ms;
+}
+.card__section__reset-btn > * {
+  transition: background 200ms, color 200ms;
 }
 .card__section__reset-btn > .card__section__reset-btn__shadow {
   position: absolute;
@@ -382,6 +363,7 @@ input[name=people] {
 .card__section__reset-btn:focus-visible {
   outline: #26c0ab ridge;
 }
+
 .card__section__reset-btn--disabled > .card__section__reset-btn__front,
 .card__section__reset-btn--disabled > .card__section__reset-btn__edge {
   cursor: not-allowed;
@@ -392,6 +374,31 @@ input[name=people] {
 }
 .card__section__reset-btn--disabled:focus-visible {
   outline: transparent;
+}
+
+.card__section__container__amount {
+  transition: background 200ms;
+  scrollbar-width: thin;
+  scrollbar-color: #26c0ab #00494d;
+}
+.card__section__container__amount::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.card__section__container__amount::-webkit-scrollbar-thumb {
+  background: #1d9585;
+}
+.card__section__container__amount:hover {
+  scrollbar-color: cyan;
+}
+.card__section__container__amount:hover::-webkit-scrollbar-thumb {
+  background: #1b887a;
+}
+.card__section__container__amount:active, .card__section__container__amount:focus {
+  scrollbar-color: #26c0ab #00494d;
+}
+.card__section__container__amount:active::-webkit-scrollbar-thumb, .card__section__container__amount:focus::-webkit-scrollbar-thumb {
+  background: #177367;
 }
 
 /*# sourceMappingURL=style.css.map */

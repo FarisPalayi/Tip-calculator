@@ -1,0 +1,34 @@
+
+@use '../abstract' as *
+
+.card__section--right 
+  @include flexbox(col, space-between)
+  margin: 27px 0
+  background-color: $verydarkCyan
+  padding: 23px
+  border-radius: 15px
+  width: calc(100vw - 67px)
+
+  @include bp()
+    margin: 0
+    width: auto
+
+.card__section__container
+  @include flexbox(null, space-between)
+  margin-bottom: 26px
+
+.card__section__container__amount
+  font-size: 1.95rem
+  color: $strongCyan
+  overflow-x: auto    
+
+  @include bp()
+    max-width: 190px
+
+.card__section__container__title
+  max-width: 110px
+  
+  > span
+    color: $lightGrayishCyan1
+    font-weight: normal
+    font-size: .8em

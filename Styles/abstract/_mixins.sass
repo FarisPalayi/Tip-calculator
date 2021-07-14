@@ -1,0 +1,25 @@
+@mixin bp()
+  @media screen and (min-width: 785px)
+    @content
+
+// this is a reusable flexbox mixin that I use.
+// unnecessary/unwanted properties are handled by passing null or false as an argument
+
+@mixin flexbox($dir: null, $jc: null, $ai: null, $gap: null)
+  display: flex
+
+  @if $dir == col
+    flex-direction: column
+  @else if $dir == column
+    flex-direction: column
+  @else if $dir == row
+    flex-direction: row
+
+  @if $ai
+    align-items: $ai
+
+  @if $jc
+    justify-content: $jc
+
+  @if $gap
+    gap: $gap
