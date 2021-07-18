@@ -1,20 +1,34 @@
 import { TIP_AMT } from '../dom'
-import { inputs } from "../inputsOutputObj";
+import { inputsObj } from "../inputsObj";
 import { prependDollarSign } from "../utils/utils";
-import { isTipAmountValid } from "../validation/tipIntput";
+import { isTipAmountValid } from '../validation/validation';
 
-export function calculateTip(): number {
-  return inputs.bill * inputs.tipInPercent / 100;
+/**
+ * Calculate tip using the bill, tip percent values
+*/
+
+function calculateTip(): number {
+  return inputsObj.bill * inputsObj.tipInPercent / 100;
 }
 
-export function calculateTipPerPerson(): number {
-  return calculateTip() / inputs.noOfPeople;
+/**
+ * Calculate tip per person by dividing the no.of people with total bill.
+ * Total bill is obtained by using {@link calculateTip} function
+*/
+
+function calculateTipPerPerson(): number {
+  return calculateTip() / inputsObj.noOfPeople;
 }
 
-export function showTipPerPerson(): void {
-  if (isTipAmountValid()) {
+/**
+ * Shows the tip per person value (in dollars)
+*/
+
+function showTipPerPerson(): void {
+  if (isTipAmountValid())
     TIP_AMT!.innerText = prependDollarSign(calculateTipPerPerson());
-  } else {
+  else
     TIP_AMT!.innerText = prependDollarSign(0);
-  }
 }
+
+export { calculateTip, calculateTipPerPerson, showTipPerPerson }

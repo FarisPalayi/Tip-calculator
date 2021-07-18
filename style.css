@@ -213,7 +213,8 @@ header > h1 {
 
 .card__section__error {
   opacity: 0;
-  color: red;
+  font-size: 0.9em;
+  color: #ff5a5a;
 }
 .card__section__error--visible {
   opacity: 1;
