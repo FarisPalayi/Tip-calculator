@@ -1,4 +1,4 @@
-import * as DOM from './dom'
+import { BILL_INPUT, PEOPLE_INPUT } from './dom'
 
 interface inputsInterface {
   bill: number,
@@ -6,8 +6,10 @@ interface inputsInterface {
   noOfPeople: number,
 }
 
-export let inputsObj: inputsInterface = {
-  bill: parseFloat(DOM.BILL_INPUT!.value),
+let inputsObj: inputsInterface = {
+  bill: parseFloat(BILL_INPUT!.value),
   tipInPercent: .15,
-  noOfPeople: parseInt(DOM.PEOPLE_INPUT!.value),
+  noOfPeople: parseInt(PEOPLE_INPUT!.value),
 }
+
+export default inputsObj

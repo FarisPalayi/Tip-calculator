@@ -4,13 +4,15 @@
  * @description a basic tip calculator
  */
 
-import * as DOM from './dom'
-import { inputsObj } from './inputsObj'
-import { resetInputs, disableResetBtn } from './resetBtn'
+import * as DOM from './dom';
+import inputsObj from './inputsObj';
+import { resetInputs, disableResetBtn } from './resetBtn';
 import { removeBtnActive, setBtnActive } from './utils/utils';
 import { showTipPerPerson } from './calculation/calculateTip';
 import { showTotalBillPerPerson } from './calculation/calculateTotalBill';
-import { hideErrorMsg, validatePeopleInput } from './validation/validation'
+import { hideErrorMsg, showErrorMsgOnPeopleInput } from './validation/validation';
+
+// -----------------------=
 
 showTipPerPerson();
 showTotalBillPerPerson();
@@ -42,7 +44,7 @@ function updateCustomTipPercent(): void {
 
 DOM.PEOPLE_INPUT?.addEventListener('input', (event: Event): void => {
   updatePeople();
-  validatePeopleInput(); // to show error if invalid
+  showErrorMsgOnPeopleInput(); // to show error if invalid
   disableResetBtn();
 })
 
@@ -51,7 +53,7 @@ DOM.PEOPLE_INPUT?.addEventListener('keydown', (event: KeyboardEvent): void => {
     updatePeople();
     showTipPerPerson();
     showTotalBillPerPerson();
-    validatePeopleInput();
+    showErrorMsgOnPeopleInput();
     disableResetBtn();
   }
 });

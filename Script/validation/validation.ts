@@ -1,36 +1,41 @@
-import * as DOM from '../dom'
+import { ERROR as ERROR_ELM, PEOPLE_INPUT } from '../dom'
 import { calculateTipPerPerson } from '../calculation/calculateTip';
 import { calculateTotalBillPerPerson } from '../calculation/calculateTotalBill';
+import { isInteger } from '../utils/utils';
 
-// TODO: add transition to error text, and change it's color
-// ------------------------------
-// validate bill input
 
-export function isBillAmountValid(): boolean {
-  const calculatedTotalBillAmount: number = calculateTotalBillPerPerson();
-  return !isNaN(calculatedTotalBillAmount) && isFinite(calculatedTotalBillAmount) && calculatedTotalBillAmount > 0;
+// TODO: add transitions to error text
+// TODO: Change error message's color to red ✔
+
+/**
+ * Checks if the calculated total bill per person is valid.
+ * - Total bill per person is obtained by using the {@link calculateTotalBillPerPerson} function
+ */
+function isBillAmountValid(): boolean {
+  const totalBillAmount: number = calculateTotalBillPerPerson();
+  return !isNaN(totalBillAmount) && isFinite(totalBillAmount) && totalBillAmount > 0;
 }
 
-// ------------------------------
-// validate tip input
-
-export function isTipAmountValid(): boolean {
+/**
+ * Checks if the calculated tip per person value is valid.
+ * - Tip per person is obtained by using the {@link calculateTipPerPerson} function 
+*/
+function isTipAmountValid(): boolean {
   const calculatedTipAmount: number = calculateTipPerPerson();
   return !isNaN(calculatedTipAmount) && isFinite(calculatedTipAmount) && calculatedTipAmount > 0;
 }
 
-// ------------------------------
-// validate people input
-
-function isInteger(str: string): boolean {
-  return parseFloat(str) === parseInt(str);
+/**
+ * Checks if the people input value is valid.
+*/
+function isPeopleInputValid(): boolean {
+  const NoOfPeople: number = parseInt(PEOPLE_INPUT!.value);
+  return !isNaN(NoOfPeople) && NoOfPeople > 0 && isInteger(PEOPLE_INPUT!.value);
 }
 
-export function isPeopleInputValid(): boolean {
-  const peopleInputAsANumber: number = parseInt(DOM.PEOPLE_INPUT!.value);
-  return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0 && isInteger(DOM.PEOPLE_INPUT!.value);
-}
-
+/**
+ * Prints error message based on some constraints.
+ */
 function errorMsgs(elementText: string, errorElm: HTMLElement): void {
   const elementTextAsANumber = parseFloat(elementText);
   
@@ -48,31 +53,48 @@ function errorMsgs(elementText: string, errorElm: HTMLElement): void {
     showError('invalid input')
 }
 
+/**
+ * Shows the error message on the people input
+*/
 function showErrorMsg(): void {
-  errorMsgs(DOM.PEOPLE_INPUT!.value, DOM.ERROR!);
-  DOM.ERROR!.style.display = 'block';
-  DOM.ERROR?.classList.add('card__section__error--visible');
+  errorMsgs(PEOPLE_INPUT!.value, ERROR_ELM!);
+  ERROR_ELM!.style.display = 'block';
+  ERROR_ELM?.classList.add('card__section__error--visible');
+  setPeopleInputInvalid();
 }
 
-export function hideErrorMsg(): void {
-  DOM.ERROR!.style.display = 'none';
-  DOM.ERROR?.classList.remove('card__section__error--visible');
+/**
+ * Hides the error message on the people input 
+*/
+function hideErrorMsg(): void {
+  ERROR_ELM?.classList.remove('card__section__error--visible');
+  ERROR_ELM!.style.display = 'none';
+  setPeopleInputValid();
 }
 
+/**
+ * Sets the people input invalid.
+ * So, that css :invalid pseudo-class will apply styles.
+ */
 function setPeopleInputValid(): void {
-  DOM.PEOPLE_INPUT?.setCustomValidity('');
+  PEOPLE_INPUT?.setCustomValidity('');
 }
 
+/**
+ * Sets the people input invalid.
+ * So that the css :invalid pseudo class won't apply styles.
+*/
 function setPeopleInputInvalid(): void {
-  DOM.PEOPLE_INPUT?.setCustomValidity('Please enter a number greater than 0');
+  PEOPLE_INPUT?.setCustomValidity('Please enter a number greater than 0');
 }
 
-export function validatePeopleInput(): void {
-  if (isPeopleInputValid()) {
-    hideErrorMsg();
-    setPeopleInputValid();
-  } else {
-    showErrorMsg();
-    setPeopleInputInvalid();
-  }
+/**
+ * Shows error message on people input's error element if the input is not valid.
+*/
+function showErrorMsgOnPeopleInput(): void {
+  if (isPeopleInputValid()) hideErrorMsg();
+  else showErrorMsg();
 }
+
+
+export { isBillAmountValid, isTipAmountValid, isPeopleInputValid, hideErrorMsg, showErrorMsgOnPeopleInput }

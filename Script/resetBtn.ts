@@ -1,5 +1,5 @@
 import * as DOM from './dom'
-import { inputsObj } from './inputsObj'
+import inputsObj from './inputsObj'
 import { isBillAmountValid, isPeopleInputValid, isTipAmountValid } from './validation/validation';
 
 /**
@@ -20,10 +20,10 @@ function resetInputs(): void {
   DOM.TOTAL_BILL_AMT!.innerText = '$0.00'
 }
 
+
 /**
  * Disable reset button if the input values are invalid
  */
-
 function disableResetBtn(): void {
   setTimeout((): void => {
     const isInputsAreInvalid: boolean = !isBillAmountValid() || !isTipAmountValid() || !isPeopleInputValid();

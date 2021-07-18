@@ -215,6 +215,7 @@ header > h1 {
   opacity: 0;
   font-size: 0.9em;
   color: #ff5a5a;
+  transition: opacity 300ms;
 }
 .card__section__error--visible {
   opacity: 1;
