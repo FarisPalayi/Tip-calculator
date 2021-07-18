@@ -1,5 +1,4 @@
-"use strict";
-define("animations", ["require", "exports"], function (require, exports) {
+define("../animations", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Animation {
@@ -94,89 +93,129 @@ define("animations", ["require", "exports"], function (require, exports) {
     }
     exports.default = Animation;
 });
-define("index", ["require", "exports", "animations"], function (require, exports, animations_1) {
+define("dom", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    const billInput = document.querySelector('input[name=bill]');
-    const billPercentBtns = document.querySelectorAll('.card__section__btns-wrapper__btn');
-    const tipAmountElm = document.querySelector('.card__section__container--tip .card__section__container__amount');
-    const totalBillElm = document.querySelector('.card__section__container--total .card__section__container__amount');
-    const peopleInput = document.querySelector('input[name=people]');
-    const customTipPercentInput = document.querySelector('input[name=custom]');
-    let bill = parseFloat(billInput.value);
-    let tipInPercent = .15;
-    let people = parseInt(peopleInput.value);
-    function updateBill() {
-        bill = parseFloat(billInput.value) || 0;
-    }
-    function updateTipPercent(event) {
-        const clickedElmPercent = event.target?.getAttribute('data-percent');
-        tipInPercent = parseFloat(clickedElmPercent);
-    }
-    function updateCustomTipPercent() {
-        tipInPercent = parseFloat(customTipPercentInput.value) || 0;
-    }
-    function updatePeople() {
-        people = parseInt(peopleInput.value) || 0;
-    }
-    function calculateTip() {
-        return bill * tipInPercent / 100;
-    }
-    function calculateTipPerPerson() {
-        return calculateTip() / people;
-    }
+    exports.ERROR = exports.RESET_BTN = exports.TOTAL_BILL_AMT = exports.TIP_AMT = exports.PEOPLE_INPUT = exports.CUSTOM_TIP_PERCENT_INPUT = exports.TIP_PERCENT_BTNS = exports.BILL_INPUT = void 0;
+    exports.BILL_INPUT = document.querySelector('input[name=bill]');
+    exports.TIP_PERCENT_BTNS = document.querySelectorAll('.card__section__btns-wrapper__btn');
+    exports.CUSTOM_TIP_PERCENT_INPUT = document.querySelector('input[name=custom]');
+    exports.PEOPLE_INPUT = document.querySelector('input[name=people]');
+    exports.TIP_AMT = document.querySelector('.card__section__container--tip .card__section__container__amount');
+    exports.TOTAL_BILL_AMT = document.querySelector('.card__section__container--total .card__section__container__amount');
+    exports.RESET_BTN = document.querySelector('.card__section__reset-btn');
+    exports.ERROR = document.querySelector('.card__section__error');
+});
+define("inputsOutputObj", ["require", "exports", "dom"], function (require, exports, DOM) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.results = exports.inputs = void 0;
+    exports.inputs = {
+        bill: parseFloat(DOM.BILL_INPUT.value),
+        tipInPercent: .15,
+        noOfPeople: parseInt(DOM.PEOPLE_INPUT.value),
+    };
+    exports.results = {
+        tipInDollar: '$0.00',
+        totalBillInDollar: '$0.00',
+    };
+});
+define("utils/utils", ["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.removeBtnActive = exports.setBtnActive = exports.prependDollarSign = void 0;
     function prependDollarSign(amount) {
         return `$${amount.toFixed(2)}`;
     }
-    function isTipAmountValid() {
-        const calculatedTipAmount = calculateTipPerPerson();
-        return !isNaN(calculatedTipAmount) && isFinite(calculatedTipAmount) && calculatedTipAmount > 0;
-    }
-    function showTipPerPerson() {
-        if (isTipAmountValid()) {
-            tipAmountElm.innerText = prependDollarSign(calculateTipPerPerson());
-        }
-        else {
-            tipAmountElm.innerText = prependDollarSign(0);
-        }
-    }
-    showTipPerPerson();
-    function calculateTotalBill() {
-        return bill + calculateTip();
-    }
-    function calculateTotalBillPerPerson() {
-        return calculateTotalBill() / people;
-    }
-    function isBillAmountValid() {
-        const calculatedTotalBillAmount = calculateTotalBillPerPerson();
-        return !isNaN(calculatedTotalBillAmount) && isFinite(calculatedTotalBillAmount) && calculatedTotalBillAmount > 0;
-    }
-    function showTotalBillPerPerson() {
-        if (isBillAmountValid()) {
-            totalBillElm.innerHTML = prependDollarSign(calculateTotalBillPerPerson());
-        }
-        else {
-            totalBillElm.innerText = prependDollarSign(0);
-        }
-    }
-    showTotalBillPerPerson();
+    exports.prependDollarSign = prependDollarSign;
     function setBtnActive(element, active) {
         const btnActiveClass = 'card__section__btns-wrapper__btn--active';
         element.classList.toggle(btnActiveClass, active);
     }
-    function removeBtnActive() {
-        billPercentBtns?.forEach((percentBtn) => {
+    exports.setBtnActive = setBtnActive;
+    function removeBtnActive(elements) {
+        elements?.forEach((percentBtn) => {
             setBtnActive(percentBtn, false);
         });
     }
-    const errorElm = document.querySelector('.card__section__error');
+    exports.removeBtnActive = removeBtnActive;
+});
+define("validation/tipIntput", ["require", "exports", "calculation/calculateTip"], function (require, exports, calculateTip_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.isTipAmountValid = void 0;
+    function isTipAmountValid() {
+        const calculatedTipAmount = calculateTip_1.calculateTipPerPerson();
+        return !isNaN(calculatedTipAmount) && isFinite(calculatedTipAmount) && calculatedTipAmount > 0;
+    }
+    exports.isTipAmountValid = isTipAmountValid;
+});
+define("calculation/calculateTip", ["require", "exports", "dom", "inputsOutputObj", "utils/utils", "validation/tipIntput"], function (require, exports, dom_1, inputsOutputObj_1, utils_1, tipIntput_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.showTipPerPerson = exports.calculateTipPerPerson = exports.calculateTip = void 0;
+    function calculateTip() {
+        return inputsOutputObj_1.inputs.bill * inputsOutputObj_1.inputs.tipInPercent / 100;
+    }
+    exports.calculateTip = calculateTip;
+    function calculateTipPerPerson() {
+        return calculateTip() / inputsOutputObj_1.inputs.noOfPeople;
+    }
+    exports.calculateTipPerPerson = calculateTipPerPerson;
+    function showTipPerPerson() {
+        if (tipIntput_1.isTipAmountValid()) {
+            dom_1.TIP_AMT.innerText = utils_1.prependDollarSign(calculateTipPerPerson());
+        }
+        else {
+            dom_1.TIP_AMT.innerText = utils_1.prependDollarSign(0);
+        }
+    }
+    exports.showTipPerPerson = showTipPerPerson;
+});
+define("validation/billInput", ["require", "exports", "calculation/calculateTotalBill"], function (require, exports, calculateTotalBill_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.isBillAmountValid = void 0;
+    function isBillAmountValid() {
+        const calculatedTotalBillAmount = calculateTotalBill_1.calculateTotalBillPerPerson();
+        return !isNaN(calculatedTotalBillAmount) && isFinite(calculatedTotalBillAmount) && calculatedTotalBillAmount > 0;
+    }
+    exports.isBillAmountValid = isBillAmountValid;
+});
+define("calculation/calculateTotalBill", ["require", "exports", "dom", "inputsOutputObj", "utils/utils", "validation/billInput", "calculation/calculateTip"], function (require, exports, dom_2, inputsOutputObj_2, utils_2, billInput_1, calculateTip_2) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.showTotalBillPerPerson = exports.calculateTotalBillPerPerson = exports.calculateTotalBill = void 0;
+    function calculateTotalBill() {
+        return inputsOutputObj_2.inputs.bill + calculateTip_2.calculateTip();
+    }
+    exports.calculateTotalBill = calculateTotalBill;
+    function calculateTotalBillPerPerson() {
+        return calculateTotalBill() / inputsOutputObj_2.inputs.noOfPeople;
+    }
+    exports.calculateTotalBillPerPerson = calculateTotalBillPerPerson;
+    function showTotalBillPerPerson() {
+        if (billInput_1.isBillAmountValid()) {
+            dom_2.TOTAL_BILL_AMT.innerHTML = utils_2.prependDollarSign(calculateTotalBillPerPerson());
+        }
+        else {
+            dom_2.TOTAL_BILL_AMT.innerText = utils_2.prependDollarSign(0);
+        }
+    }
+    exports.showTotalBillPerPerson = showTotalBillPerPerson;
+});
+define("validation/peopleInput", ["require", "exports", "dom"], function (require, exports, DOM) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.validatePeopleInput = exports.hideErrorMsg = exports.isPeopleInputValid = void 0;
     function isInteger(str) {
         return parseFloat(str) === parseInt(str);
     }
     function isPeopleInputValid() {
-        const peopleInputAsANumber = parseInt(peopleInput.value);
-        return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0 && isInteger(peopleInput.value);
+        const peopleInputAsANumber = parseInt(DOM.PEOPLE_INPUT.value);
+        return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0 && isInteger(DOM.PEOPLE_INPUT.value);
     }
+    exports.isPeopleInputValid = isPeopleInputValid;
     function errorMsgs(val, errorElm) {
         const valueAsANumber = parseFloat(val);
         if (val === '') {
@@ -196,19 +235,20 @@ define("index", ["require", "exports", "animations"], function (require, exports
         }
     }
     function showErrorMsg() {
-        errorMsgs(peopleInput.value, errorElm);
-        errorElm.style.display = 'block';
-        errorElm?.classList.add('card__section__error--visible');
+        errorMsgs(DOM.PEOPLE_INPUT.value, DOM.ERROR);
+        DOM.ERROR.style.display = 'block';
+        DOM.ERROR?.classList.add('card__section__error--visible');
     }
     function hideErrorMsg() {
-        errorElm.style.display = 'none';
-        errorElm?.classList.remove('card__section__error--visible');
+        DOM.ERROR.style.display = 'none';
+        DOM.ERROR?.classList.remove('card__section__error--visible');
     }
+    exports.hideErrorMsg = hideErrorMsg;
     function setPeopleInputValid() {
-        peopleInput?.setCustomValidity('');
+        DOM.PEOPLE_INPUT?.setCustomValidity('');
     }
     function setPeopleInputInvalid() {
-        peopleInput?.setCustomValidity('Please enter a number greater than 0');
+        DOM.PEOPLE_INPUT?.setCustomValidity('Please enter a number greater than 0');
     }
     function validatePeopleInput() {
         if (isPeopleInputValid()) {
@@ -220,90 +260,139 @@ define("index", ["require", "exports", "animations"], function (require, exports
             setPeopleInputInvalid();
         }
     }
-    billInput?.addEventListener('input', () => {
-        updateBill();
-        disableResetBtnIfInputsAreInvalid();
-    });
-    billInput?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            updateBill();
-            showTipPerPerson();
-            showTotalBillPerPerson();
-            disableResetBtnIfInputsAreInvalid();
-        }
-    });
-    billPercentBtns?.forEach((percentBtn) => {
-        percentBtn.addEventListener('click', (event) => {
-            updateTipPercent(event);
-            showTipPerPerson();
-            showTotalBillPerPerson();
-            removeBtnActive();
-            setBtnActive(percentBtn, true);
-            disableResetBtnIfInputsAreInvalid();
-        });
-    });
-    customTipPercentInput?.addEventListener('input', (event) => {
-        updateCustomTipPercent();
-        removeBtnActive();
-        disableResetBtnIfInputsAreInvalid();
-    });
-    customTipPercentInput?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            updateCustomTipPercent();
-            showTipPerPerson();
-            showTotalBillPerPerson();
-            removeBtnActive();
-            disableResetBtnIfInputsAreInvalid();
-        }
-    });
-    peopleInput?.addEventListener('input', (event) => {
-        updatePeople();
-        validatePeopleInput();
-        disableResetBtnIfInputsAreInvalid();
-    });
-    peopleInput?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            updatePeople();
-            showTipPerPerson();
-            showTotalBillPerPerson();
-            validatePeopleInput();
-            disableResetBtnIfInputsAreInvalid();
-        }
-    });
-    const resetBtn = document.querySelector('.card__section__reset-btn');
-    resetBtn?.addEventListener('click', resetInputs);
+    exports.validatePeopleInput = validatePeopleInput;
+});
+define("resetBtn", ["require", "exports", "dom", "inputsOutputObj", "bill", "people", "utils/utils", "validation/billInput", "validation/tipIntput", "validation/peopleInput"], function (require, exports, DOM, inputsOutputObj_3, bill_1, people_1, utils_3, billInput_2, tipIntput_2, peopleInput_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.disableResetBtnIfInputsAreInvalid = exports.resetInputs = void 0;
     function resetInputs() {
-        billInput.value = '0';
-        peopleInput.value = '1';
-        customTipPercentInput.value = '';
-        tipAmountElm.innerHTML = '$0.00';
-        totalBillElm.innerHTML = '$0.00';
-        tipInPercent = 0;
-        updateBill();
-        updatePeople();
-        hideErrorMsg();
-        removeBtnActive();
+        DOM.BILL_INPUT.value = '0';
+        DOM.PEOPLE_INPUT.value = '1';
+        DOM.CUSTOM_TIP_PERCENT_INPUT.value = '';
+        DOM.TIP_AMT.innerHTML = '$0.00';
+        DOM.TOTAL_BILL_AMT.innerHTML = '$0.00';
+        inputsOutputObj_3.inputs.tipInPercent = 0;
+        bill_1.updateBill();
+        people_1.updatePeople();
+        peopleInput_1.hideErrorMsg();
+        utils_3.removeBtnActive(DOM.TIP_PERCENT_BTNS);
         disableResetBtnIfInputsAreInvalid();
     }
+    exports.resetInputs = resetInputs;
     function disableResetBtnIfInputsAreInvalid() {
         setTimeout(() => {
-            const isInputsAreInvalid = !isBillAmountValid() || !isTipAmountValid() || !isPeopleInputValid();
-            resetBtn.disabled = isInputsAreInvalid;
+            const isInputsAreInvalid = !billInput_2.isBillAmountValid() || !tipIntput_2.isTipAmountValid() || !peopleInput_1.isPeopleInputValid();
+            DOM.RESET_BTN.disabled = isInputsAreInvalid;
             if (isInputsAreInvalid) {
-                resetBtn?.classList.add('card__section__reset-btn--disabled');
+                DOM.RESET_BTN?.classList.add('card__section__reset-btn--disabled');
             }
             else {
-                resetBtn?.classList.remove('card__section__reset-btn--disabled');
+                DOM.RESET_BTN?.classList.remove('card__section__reset-btn--disabled');
             }
         }, 200);
     }
+    exports.disableResetBtnIfInputsAreInvalid = disableResetBtnIfInputsAreInvalid;
+    DOM.RESET_BTN?.addEventListener('click', resetInputs);
     disableResetBtnIfInputsAreInvalid();
-    const name = "fade-in";
-    const duration = 0;
-    const delay = 0;
-    const easing = "ease-in";
-    const animation = new animations_1.default(name, duration, delay, easing);
-    console.log(animation.toString());
-    console.log(animation.clone().toString());
+});
+define("showResult", ["require", "exports", "dom", "inputsOutputObj"], function (require, exports, dom_3, inputsOutputObj_4) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.showResults = void 0;
+    function showResults() {
+        dom_3.TIP_AMT.innerText = inputsOutputObj_4.results.tipInDollar;
+        dom_3.TOTAL_BILL_AMT.innerText = inputsOutputObj_4.results.totalBillInDollar;
+    }
+    exports.showResults = showResults;
+});
+define("people", ["require", "exports", "calculation/calculateTip", "calculation/calculateTotalBill", "dom", "inputsOutputObj", "resetBtn", "validation/peopleInput"], function (require, exports, calculateTip_3, calculateTotalBill_2, DOM, inputsOutputObj_5, resetBtn_1, peopleInput_2) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.updatePeople = void 0;
+    function updatePeople() {
+        inputsOutputObj_5.inputs.noOfPeople = parseInt(DOM.PEOPLE_INPUT.value) || 0;
+    }
+    exports.updatePeople = updatePeople;
+    DOM.PEOPLE_INPUT?.addEventListener('input', (event) => {
+        updatePeople();
+        peopleInput_2.validatePeopleInput();
+        resetBtn_1.disableResetBtnIfInputsAreInvalid();
+    });
+    DOM.PEOPLE_INPUT?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            updatePeople();
+            calculateTip_3.showTipPerPerson();
+            calculateTotalBill_2.showTotalBillPerPerson();
+            peopleInput_2.validatePeopleInput();
+            resetBtn_1.disableResetBtnIfInputsAreInvalid();
+        }
+    });
+});
+define("bill", ["require", "exports", "calculation/calculateTip", "calculation/calculateTotalBill", "dom", "inputsOutputObj", "people", "resetBtn", "validation/peopleInput"], function (require, exports, calculateTip_4, calculateTotalBill_3, DOM, inputsOutputObj_6, people_2, resetBtn_2, peopleInput_3) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.updateBill = void 0;
+    function updateBill() {
+        inputsOutputObj_6.inputs.bill = parseFloat(DOM.BILL_INPUT.value) || 0;
+    }
+    exports.updateBill = updateBill;
+    DOM.BILL_INPUT?.addEventListener('input', () => {
+        updateBill();
+        resetBtn_2.disableResetBtnIfInputsAreInvalid();
+    });
+    DOM.BILL_INPUT?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            people_2.updatePeople();
+            calculateTip_4.showTipPerPerson();
+            calculateTotalBill_3.showTotalBillPerPerson();
+            peopleInput_3.validatePeopleInput();
+            resetBtn_2.disableResetBtnIfInputsAreInvalid();
+        }
+    });
+});
+define("tip", ["require", "exports", "calculation/calculateTip", "calculation/calculateTotalBill", "dom", "inputsOutputObj", "resetBtn", "utils/utils"], function (require, exports, calculateTip_5, calculateTotalBill_4, DOM, inputsOutputObj_7, resetBtn_3, utils_4) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    exports.updateCustomTipPercent = exports.updateTipPercent = void 0;
+    function updateTipPercent(event) {
+        const clickedElmPercent = event.target?.getAttribute('data-percent');
+        inputsOutputObj_7.inputs.tipInPercent = parseFloat(clickedElmPercent);
+    }
+    exports.updateTipPercent = updateTipPercent;
+    function updateCustomTipPercent() {
+        inputsOutputObj_7.inputs.tipInPercent = parseFloat(DOM.CUSTOM_TIP_PERCENT_INPUT.value) || 0;
+    }
+    exports.updateCustomTipPercent = updateCustomTipPercent;
+    DOM.TIP_PERCENT_BTNS?.forEach((percentBtn) => {
+        percentBtn.addEventListener('click', (event) => {
+            updateTipPercent(event);
+            calculateTip_5.showTipPerPerson();
+            calculateTotalBill_4.showTotalBillPerPerson();
+            utils_4.removeBtnActive(DOM.TIP_PERCENT_BTNS);
+            utils_4.setBtnActive(percentBtn, true);
+            resetBtn_3.disableResetBtnIfInputsAreInvalid();
+        });
+    });
+    DOM.CUSTOM_TIP_PERCENT_INPUT?.addEventListener('input', (event) => {
+        updateCustomTipPercent();
+        utils_4.removeBtnActive(DOM.TIP_PERCENT_BTNS);
+        resetBtn_3.disableResetBtnIfInputsAreInvalid();
+    });
+    DOM.CUSTOM_TIP_PERCENT_INPUT?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            updateCustomTipPercent();
+            calculateTip_5.showTipPerPerson();
+            calculateTotalBill_4.showTotalBillPerPerson();
+            utils_4.removeBtnActive(DOM.TIP_PERCENT_BTNS);
+            resetBtn_3.disableResetBtnIfInputsAreInvalid();
+        }
+    });
+});
+define("index", ["require", "exports", "calculation/calculateTip", "calculation/calculateTotalBill"], function (require, exports, calculateTip_6, calculateTotalBill_5) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    calculateTip_6.showTipPerPerson();
+    calculateTotalBill_5.showTotalBillPerPerson();
 });
 //# sourceMappingURL=index.js.map

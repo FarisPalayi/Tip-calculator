@@ -1,24 +1,23 @@
 import { showTipPerPerson } from './calculation/calculateTip';
 import { showTotalBillPerPerson } from './calculation/calculateTotalBill';
 import * as DOM from './dom'
-import { inputs, results } from './inputsOutputObj'
-import { updatePeople } from './people';
-import { disableResetBtnIfInputsAreInvalid } from './resetBtn'
+import { inputs, results } from './inputsOutputObj';
+import { disableResetBtnIfInputsAreInvalid } from './resetBtn';
 import { showResults } from './showResult';
 import { validatePeopleInput } from './validation/peopleInput';
 
-
-export function updateBill(): void {
-  inputs.bill = parseFloat(DOM.BILL_INPUT!.value) || 0;
+export function updatePeople(): void {
+  inputs.noOfPeople = parseInt(DOM.PEOPLE_INPUT!.value) || 0;
 }
 
 
-DOM.BILL_INPUT?.addEventListener('input', (): void => {
-  updateBill();
+DOM.PEOPLE_INPUT?.addEventListener('input', (event: Event): void => {
+  updatePeople();
+  validatePeopleInput(); // to show error if invalid
   disableResetBtnIfInputsAreInvalid();
 })
 
-DOM.BILL_INPUT?.addEventListener('keydown', (event: KeyboardEvent): void => {
+DOM.PEOPLE_INPUT?.addEventListener('keydown', (event: KeyboardEvent): void => {
   if (event.key === 'Enter') {
     updatePeople();
     showTipPerPerson();
