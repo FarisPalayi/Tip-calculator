@@ -15,7 +15,7 @@ const peopleInput: HTMLInputElement | null = document.querySelector('input[name=
 const customTipPercentInput: HTMLInputElement | null = document.querySelector('input[name=custom]');
 
 // -------------------------
-// global variables
+// global variablesa
 
 let bill: number = parseFloat(billInput!.value);
 let tipInPercent: number = .15; // initial value
@@ -122,12 +122,32 @@ function removeBtnActive(): void {
 
 const errorElm: HTMLSpanElement | null = document.querySelector('.card__section__error');
 
+function isInteger(str: string): boolean {
+  return parseFloat(str) === parseInt(str);
+}
+
 function isPeopleInputValid(): boolean {
   const peopleInputAsANumber: number = parseInt(peopleInput!.value);
-  return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
+  return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0 && isInteger(peopleInput!.value);
+}
+
+function errorMsgs(val: string, errorElm: HTMLElement): void {
+  const valueAsANumber = parseFloat(val);
+  if (val === '') {
+    errorElm!.innerText = 'Can\'t be empty';
+  } else if ( valueAsANumber < 0 ) {
+    errorElm!.innerText = 'Should be greater than zero';
+  } else if ( valueAsANumber === 0 ) {
+    errorElm!.innerText = 'Can\'t be zero';
+  } else if ( val.includes('.') ) {
+    errorElm!.innerText = 'Should be an integer';
+  } else {
+    errorElm!.innerText = 'invalid input'
+  }
 }
 
 function showErrorMsg(): void {
+  errorMsgs(peopleInput!.value, errorElm!);
   errorElm!.style.display = 'block';
   errorElm?.classList.add('card__section__error--visible');
 }
@@ -250,18 +270,6 @@ function disableResetBtnIfInputsAreInvalid(): void {
 
 disableResetBtnIfInputsAreInvalid();
 
-// difference between textContent and innerHTML
-// textContent is used for text node
-// innerHTML is used for element node
-// thanks :thumbsup:
-// https://stackoverflow.com/questions/123415/whats-the-difference-between-textcontent-and-innerhtml
-// https://developer.mozilla.org/en-US/docs/Web/API/TextNode
-// these links aren't working
-// https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
-// yeah, this one works :thumbsup:
-// difference between aria-labelledby and aria-describedby
-// https://www.w3.org/TR/wai-aria-1.1/#aria-labelledby
-
 import Animation from "./animations";
 
 const name : string = "fade-in";
@@ -273,4 +281,4 @@ const animation = new Animation(name, duration, delay, easing);
 console.log(animation.toString())
 console.log(animation.clone().toString())
 
-//! TODO : add transition changes to reset button disabling
+// TODO: add transition changes to reset button disabling

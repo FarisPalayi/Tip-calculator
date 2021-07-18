@@ -8,6 +8,7 @@
   margin: 5px 0
   overflow: hidden
   border-radius: 5px
+  background-color: #f4fafa
 
   &::before
     content: ''
@@ -16,7 +17,7 @@
     left: 2px
     height: calc(100% - (2px * 2))
     width: 46px
-    background: #f4fafa
+    background: inherit
     border-radius: 4px 0 0 4px
 
   &::after
@@ -44,8 +45,8 @@ input[type="number"]
   font-size: 1.5rem
   padding-right: 19px
   // background: var(--input_icon-path) no-repeat 20px
-  background-color: #f4fafa
   caret-color: $strongCyan
+  background-color: inherit
 
   &:focus 
     border: 2px solid $strongCyan

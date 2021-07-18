@@ -1,3 +1,4 @@
+"use strict";
 define("animations", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -169,11 +170,33 @@ define("index", ["require", "exports", "animations"], function (require, exports
         });
     }
     const errorElm = document.querySelector('.card__section__error');
+    function isInteger(str) {
+        return parseFloat(str) === parseInt(str);
+    }
     function isPeopleInputValid() {
         const peopleInputAsANumber = parseInt(peopleInput.value);
-        return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0;
+        return !isNaN(peopleInputAsANumber) && peopleInputAsANumber > 0 && isInteger(peopleInput.value);
+    }
+    function errorMsgs(val, errorElm) {
+        const valueAsANumber = parseFloat(val);
+        if (val === '') {
+            errorElm.innerText = 'Can\'t be empty';
+        }
+        else if (valueAsANumber < 0) {
+            errorElm.innerText = 'Should be greater than zero';
+        }
+        else if (valueAsANumber === 0) {
+            errorElm.innerText = 'Can\'t be zero';
+        }
+        else if (val.includes('.')) {
+            errorElm.innerText = 'Should be an integer';
+        }
+        else {
+            errorElm.innerText = 'invalid input';
+        }
     }
     function showErrorMsg() {
+        errorMsgs(peopleInput.value, errorElm);
         errorElm.style.display = 'block';
         errorElm?.classList.add('card__section__error--visible');
     }

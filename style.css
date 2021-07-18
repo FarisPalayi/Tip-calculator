@@ -206,6 +206,7 @@ header > h1 {
 .error-wrapper {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-top: 30px;
   margin-bottom: 2px;
 }
@@ -269,6 +270,7 @@ header > h1 {
   margin: 5px 0;
   overflow: hidden;
   border-radius: 5px;
+  background-color: #f4fafa;
 }
 .card__section__input-wrapper::before {
   content: "";
@@ -277,7 +279,7 @@ header > h1 {
   left: 2px;
   height: calc(100% - (2px * 2));
   width: 46px;
-  background: #f4fafa;
+  background: inherit;
   border-radius: 4px 0 0 4px;
 }
 .card__section__input-wrapper::after {
@@ -305,8 +307,8 @@ input[type=number] {
   text-align: right;
   font-size: 1.5rem;
   padding-right: 19px;
-  background-color: #f4fafa;
   caret-color: #26c0ab;
+  background-color: inherit;
 }
 input[type=number]:focus {
   border: 2px solid #26c0ab;
