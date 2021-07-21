@@ -6,14 +6,21 @@ import { isInteger } from '../utils/utils';
 
 // TODO: add transitions to error text
 // TODO: Change error message's color to red ✔
+// there are repeated code in this file.
+
+/**
+ * Function to check if the input value is valid
+*/
+function isValidInput(num: number): boolean {
+  return !isNaN(num) && isFinite(num) && num > 0;
+}
 
 /**
  * Checks if the calculated total bill per person is valid.
  * - Total bill per person is obtained by using the {@link calculateTotalBillPerPerson} function
  */
 function isBillAmountValid(): boolean {
-  const totalBillAmount: number = calculateTotalBillPerPerson();
-  return !isNaN(totalBillAmount) && isFinite(totalBillAmount) && totalBillAmount > 0;
+  return isValidInput(calculateTotalBillPerPerson());
 }
 
 /**
@@ -21,16 +28,14 @@ function isBillAmountValid(): boolean {
  * - Tip per person is obtained by using the {@link calculateTipPerPerson} function 
 */
 function isTipAmountValid(): boolean {
-  const calculatedTipAmount: number = calculateTipPerPerson();
-  return !isNaN(calculatedTipAmount) && isFinite(calculatedTipAmount) && calculatedTipAmount > 0;
+  return isValidInput(calculateTipPerPerson())
 }
 
 /**
  * Checks if the people input value is valid.
 */
 function isPeopleInputValid(): boolean {
-  const NoOfPeople: number = parseInt(PEOPLE_INPUT!.value);
-  return !isNaN(NoOfPeople) && NoOfPeople > 0 && isInteger(PEOPLE_INPUT!.value);
+  return isInteger(PEOPLE_INPUT!.value) && isValidInput(parseInt(PEOPLE_INPUT!.value));
 }
 
 /**

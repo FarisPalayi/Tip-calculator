@@ -12,7 +12,7 @@ import { showTipPerPerson } from './calculation/calculateTip';
 import { showTotalBillPerPerson } from './calculation/calculateTotalBill';
 import { hideErrorMsg, showErrorMsgOnPeopleInput } from './validation/validation';
 
-// -----------------------=
+// ------------------------
 
 showTipPerPerson();
 showTotalBillPerPerson();

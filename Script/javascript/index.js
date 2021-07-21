@@ -129,13 +129,19 @@ define("validation/validation", ["require", "exports", "dom", "calculation/calcu
     exports.showErrorMsgOnPeopleInput = exports.hideErrorMsg = exports.isPeopleInputValid = exports.isTipAmountValid = exports.isBillAmountValid = void 0;
     // TODO: add transitions to error text
     // TODO: Change error message's color to red ✔
+    // there are repeated code in this file.
+    /**
+     * Function to check if the input value is valid
+    */
+    function isValidInput(num) {
+        return !isNaN(num) && isFinite(num) && num > 0;
+    }
     /**
      * Checks if the calculated total bill per person is valid.
      * - Total bill per person is obtained by using the {@link calculateTotalBillPerPerson} function
      */
     function isBillAmountValid() {
-        const totalBillAmount = calculateTotalBill_1.calculateTotalBillPerPerson();
-        return !isNaN(totalBillAmount) && isFinite(totalBillAmount) && totalBillAmount > 0;
+        return isValidInput(calculateTotalBill_1.calculateTotalBillPerPerson());
     }
     exports.isBillAmountValid = isBillAmountValid;
     /**
@@ -143,16 +149,14 @@ define("validation/validation", ["require", "exports", "dom", "calculation/calcu
      * - Tip per person is obtained by using the {@link calculateTipPerPerson} function
     */
     function isTipAmountValid() {
-        const calculatedTipAmount = calculateTip_2.calculateTipPerPerson();
-        return !isNaN(calculatedTipAmount) && isFinite(calculatedTipAmount) && calculatedTipAmount > 0;
+        return isValidInput(calculateTip_2.calculateTipPerPerson());
     }
     exports.isTipAmountValid = isTipAmountValid;
     /**
      * Checks if the people input value is valid.
     */
     function isPeopleInputValid() {
-        const NoOfPeople = parseInt(dom_4.PEOPLE_INPUT.value);
-        return !isNaN(NoOfPeople) && NoOfPeople > 0 && utils_3.isInteger(dom_4.PEOPLE_INPUT.value);
+        return utils_3.isInteger(dom_4.PEOPLE_INPUT.value) && isValidInput(parseInt(dom_4.PEOPLE_INPUT.value));
     }
     exports.isPeopleInputValid = isPeopleInputValid;
     /**
@@ -258,7 +262,7 @@ define("resetBtn", ["require", "exports", "dom", "inputsObj", "validation/valida
 define("index", ["require", "exports", "dom", "inputsObj", "resetBtn", "utils/utils", "calculation/calculateTip", "calculation/calculateTotalBill", "validation/validation"], function (require, exports, DOM, inputsObj_4, resetBtn_1, utils_4, calculateTip_3, calculateTotalBill_2, validation_4) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    // -----------------------=
+    // ------------------------
     calculateTip_3.showTipPerPerson();
     calculateTotalBill_2.showTotalBillPerPerson();
     resetBtn_1.disableResetBtn();
