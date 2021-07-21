@@ -229,7 +229,6 @@ header > h1 {
   background-color: #00494d;
   padding: 23px;
   border-radius: 15px;
-  width: calc(100vw - 67px);
 }
 @media screen and (min-width: 785px) {
   .card__section--right {
