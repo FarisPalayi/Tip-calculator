@@ -49,7 +49,7 @@ function errorMsgs(elementText: string, errorElm: HTMLElement): void {
   if (elementText === '')
     showError(`Can't be empty`)
   else if ( elementTextAsANumber < 0 )
-    showError('Should be greater than zero')
+    showError('Can\'t be negative')
   else if ( elementTextAsANumber === 0 )
     showError(`Can\'t be zero`)
   else if ( elementText.includes('.') )
