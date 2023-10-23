@@ -24,7 +24,7 @@ define("inputsObj", ["require", "exports", "dom"], function (require, exports, d
     Object.defineProperty(exports, "__esModule", { value: true });
     let inputsObj = {
         bill: parseFloat(dom_1.BILL_INPUT?.value),
-        tipInPercent: .15,
+        tipInPercent: 15,
         noOfPeople: parseInt(dom_1.PEOPLE_INPUT?.value),
     };
     exports.default = inputsObj;
