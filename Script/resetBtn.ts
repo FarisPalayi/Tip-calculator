@@ -25,17 +25,18 @@ function resetInputs(): void {
  * Disable reset button if the input values are invalid
  */
 function disableResetBtn(): void {
+  const btnDisableDelay = 200;
   setTimeout((): void => {
-    const isInputsAreInvalid: boolean = !isBillAmountValid() || !isTipAmountValid() || !isPeopleInputValid();
+    const areInputsInvalid: boolean = !isBillAmountValid() || !isTipAmountValid() || !isPeopleInputValid();
 
-    DOM.RESET_BTN!.disabled = isInputsAreInvalid;
+    DOM.RESET_BTN!.disabled = areInputsInvalid;
 
-    if (isInputsAreInvalid)
+    if (areInputsInvalid)
       DOM.RESET_BTN?.classList.add('card__section__reset-btn--disabled');
     else
       DOM.RESET_BTN?.classList.remove('card__section__reset-btn--disabled');
 
-  }, 200); // to give btn disabling and style changes a bit delay
+  }, btnDisableDelay); // to give btn disabling and style changes a bit delay
 }
 
 

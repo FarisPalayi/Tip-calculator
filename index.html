@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Calculate how much tip you pay using this calculator">
     <meta name="author" content="Faris P" />
+    <meta name="theme-color" content="#c5e4e7" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#c5e4e7" />
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
     <title>Tip calculator app</title>
     <link rel="stylesheet" href="style.css" />
@@ -16,7 +18,7 @@
     <script data-main="./Script/javascript/config" src="./Script/javascript/requirejs_2.3.6.js"></script>
 
     <style>
-      .attribution { font-size: 11px; text-align: center; color: #008b8b; display: none }
+      .attribution { font-size: 11px; text-align: center; color: #006b6b; display: none }
       .attribution a { color: #3e52a3 }
       @media screen and (min-height: 850px) and (min-width: 1200px) { .attribution { display: block } }
     </style>
@@ -59,11 +61,11 @@
         <div>
           <div class="card__section__container card__section__container--tip">
             <p class="card__section__container__title" id="tip-amount"><span>Tip Amount</span><span>/ person</span></p>
-            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="tip-amount" aria-atomic="true">$4.27</span>
+            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="tip-amount" aria-atomic="true">$0.00</span>
           </div>
           <div class="card__section__container card__section__container--total">
             <p class="card__section__container__title" id="total-person"><span>Total</span><span>/ person</span></p>
-            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="total-person" aria-atomic="true">$32.79</span>
+            <span class="card__section__container__amount" aria-live="polite" aria-labelledby="total-person" aria-atomic="true">$0.00</span>
           </div>
         </div>
         <button class="card__section__reset-btn">
@@ -77,9 +79,9 @@
     <footer >
       <div class="attribution">
         Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener"
           >Frontend Mentor</a
-        >. Coded by <a href="https://www.frontendmentor.io/profile/FarisPalayi">Faris P</a>.
+        >. Coded by <a href="https://www.frontendmentor.io/profile/FarisPalayi" rel="noopener">Faris P</a>.
       </div>
     </footer>
   </body>

@@ -1,13 +1,24 @@
-export const BILL_INPUT: HTMLInputElement | null = document.querySelector('input[name=bill]');
+const BILL_INPUT = document.querySelector<HTMLInputElement>('input[name=bill]')!
 
-export const TIP_PERCENT_BTNS: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll('.card__section__btns-wrapper__btn');
-export const CUSTOM_TIP_PERCENT_INPUT: HTMLInputElement | null = document.querySelector('input[name=custom]');
+const TIP_PERCENT_BTNS: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.card__section__btns-wrapper__btn')!
+const CUSTOM_TIP_PERCENT_INPUT = document.querySelector<HTMLInputElement>('input[name=custom]')!
 
-export const PEOPLE_INPUT: HTMLInputElement | null = document.querySelector('input[name=people]');
+const PEOPLE_INPUT = document.querySelector<HTMLInputElement>('input[name=people]')!
 
-export const TIP_AMT: HTMLSpanElement | null = document.querySelector('.card__section__container--tip .card__section__container__amount');
-export const TOTAL_BILL_AMT: HTMLSpanElement | null = document.querySelector('.card__section__container--total .card__section__container__amount');
+const TIP_AMT = document.querySelector<HTMLSpanElement>('.card__section__container--tip .card__section__container__amount')!
+const TOTAL_BILL_AMT = document.querySelector<HTMLSpanElement>('.card__section__container--total .card__section__container__amount')!
 
-export const RESET_BTN: HTMLButtonElement | null = document.querySelector('.card__section__reset-btn');
+const RESET_BTN = document.querySelector<HTMLButtonElement>('.card__section__reset-btn')!
 
-export const ERROR: HTMLSpanElement | null = document.querySelector('.card__section__error');
+const ERROR = document.querySelector<HTMLSpanElement>('.card__section__error')!
+
+export {
+  BILL_INPUT,
+  TIP_PERCENT_BTNS,
+  CUSTOM_TIP_PERCENT_INPUT,
+  PEOPLE_INPUT,
+  TIP_AMT,
+  TOTAL_BILL_AMT,
+  RESET_BTN,
+  ERROR
+}

@@ -7,9 +7,9 @@ interface inputsInterface {
 }
 
 let inputsObj: inputsInterface = {
-  bill: parseFloat(BILL_INPUT!.value),
+  bill: parseFloat(BILL_INPUT?.value),
   tipInPercent: .15,
-  noOfPeople: parseInt(PEOPLE_INPUT!.value),
+  noOfPeople: parseInt(PEOPLE_INPUT?.value),
 }
 
 export default inputsObj

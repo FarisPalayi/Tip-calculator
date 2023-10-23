@@ -2,22 +2,30 @@ define("dom", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ERROR = exports.RESET_BTN = exports.TOTAL_BILL_AMT = exports.TIP_AMT = exports.PEOPLE_INPUT = exports.CUSTOM_TIP_PERCENT_INPUT = exports.TIP_PERCENT_BTNS = exports.BILL_INPUT = void 0;
-    exports.BILL_INPUT = document.querySelector('input[name=bill]');
-    exports.TIP_PERCENT_BTNS = document.querySelectorAll('.card__section__btns-wrapper__btn');
-    exports.CUSTOM_TIP_PERCENT_INPUT = document.querySelector('input[name=custom]');
-    exports.PEOPLE_INPUT = document.querySelector('input[name=people]');
-    exports.TIP_AMT = document.querySelector('.card__section__container--tip .card__section__container__amount');
-    exports.TOTAL_BILL_AMT = document.querySelector('.card__section__container--total .card__section__container__amount');
-    exports.RESET_BTN = document.querySelector('.card__section__reset-btn');
-    exports.ERROR = document.querySelector('.card__section__error');
+    const BILL_INPUT = document.querySelector('input[name=bill]');
+    exports.BILL_INPUT = BILL_INPUT;
+    const TIP_PERCENT_BTNS = document.querySelectorAll('.card__section__btns-wrapper__btn');
+    exports.TIP_PERCENT_BTNS = TIP_PERCENT_BTNS;
+    const CUSTOM_TIP_PERCENT_INPUT = document.querySelector('input[name=custom]');
+    exports.CUSTOM_TIP_PERCENT_INPUT = CUSTOM_TIP_PERCENT_INPUT;
+    const PEOPLE_INPUT = document.querySelector('input[name=people]');
+    exports.PEOPLE_INPUT = PEOPLE_INPUT;
+    const TIP_AMT = document.querySelector('.card__section__container--tip .card__section__container__amount');
+    exports.TIP_AMT = TIP_AMT;
+    const TOTAL_BILL_AMT = document.querySelector('.card__section__container--total .card__section__container__amount');
+    exports.TOTAL_BILL_AMT = TOTAL_BILL_AMT;
+    const RESET_BTN = document.querySelector('.card__section__reset-btn');
+    exports.RESET_BTN = RESET_BTN;
+    const ERROR = document.querySelector('.card__section__error');
+    exports.ERROR = ERROR;
 });
 define("inputsObj", ["require", "exports", "dom"], function (require, exports, dom_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     let inputsObj = {
-        bill: parseFloat(dom_1.BILL_INPUT.value),
+        bill: parseFloat(dom_1.BILL_INPUT?.value),
         tipInPercent: .15,
-        noOfPeople: parseInt(dom_1.PEOPLE_INPUT.value),
+        noOfPeople: parseInt(dom_1.PEOPLE_INPUT?.value),
     };
     exports.default = inputsObj;
 });
@@ -80,11 +88,11 @@ define("calculation/calculateTip", ["require", "exports", "dom", "inputsObj", "u
     }
     exports.calculateTipPerPerson = calculateTipPerPerson;
     /**
-     * Shows the tip per person value (in dollars) if bill input value is valid
+     * Shows the tip per person value (in dollars) if input values are valid
      * - Checks validity by using the {@link isTipAmountValid} function
     */
     function showTipPerPerson() {
-        if (validation_1.isTipAmountValid())
+        if (validation_1.isTipAmountValid() && validation_1.isBillAmountValid() && validation_1.isPeopleInputValid())
             dom_2.TIP_AMT.innerText = utils_1.prependDollarSign(calculateTipPerPerson());
         else
             dom_2.TIP_AMT.innerText = utils_1.prependDollarSign(0);
@@ -112,11 +120,11 @@ define("calculation/calculateTotalBill", ["require", "exports", "dom", "inputsOb
     }
     exports.calculateTotalBillPerPerson = calculateTotalBillPerPerson;
     /**
-     * Shows the bill per person value (in dollars) if bill input value is valid
+     * Shows the bill per person value (in dollars) if inputs are valid
      * - Checks validity by using the {@link isBillAmountValid} function
     */
     function showTotalBillPerPerson() {
-        if (validation_2.isBillAmountValid())
+        if (validation_2.isBillAmountValid() && validation_2.isTipAmountValid() && validation_2.isPeopleInputValid())
             dom_3.TOTAL_BILL_AMT.innerHTML = utils_2.prependDollarSign(calculateTotalBillPerPerson());
         else
             dom_3.TOTAL_BILL_AMT.innerText = utils_2.prependDollarSign(0);
@@ -128,11 +136,9 @@ define("validation/validation", ["require", "exports", "dom", "calculation/calcu
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.showErrorMsgOnPeopleInput = exports.hideErrorMsg = exports.isPeopleInputValid = exports.isTipAmountValid = exports.isBillAmountValid = void 0;
     // TODO: add transitions to error text
-    // TODO: Change error message's color to red ✔
-    // there are repeated code in this file.
     /**
      * Function to check if the input value is valid
-    */
+     */
     function isValidInput(num) {
         return !isNaN(num) && isFinite(num) && num > 0;
     }
@@ -147,16 +153,17 @@ define("validation/validation", ["require", "exports", "dom", "calculation/calcu
     /**
      * Checks if the calculated tip per person value is valid.
      * - Tip per person is obtained by using the {@link calculateTipPerPerson} function
-    */
+     */
     function isTipAmountValid() {
         return isValidInput(calculateTip_2.calculateTipPerPerson());
     }
     exports.isTipAmountValid = isTipAmountValid;
     /**
      * Checks if the people input value is valid.
-    */
+     */
     function isPeopleInputValid() {
-        return utils_3.isInteger(dom_4.PEOPLE_INPUT.value) && isValidInput(parseInt(dom_4.PEOPLE_INPUT.value));
+        return (utils_3.isInteger(dom_4.PEOPLE_INPUT.value) &&
+            isValidInput(parseInt(dom_4.PEOPLE_INPUT.value)));
     }
     exports.isPeopleInputValid = isPeopleInputValid;
     /**
@@ -164,33 +171,31 @@ define("validation/validation", ["require", "exports", "dom", "calculation/calcu
      */
     function errorMsgs(elementText, errorElm) {
         const elementTextAsANumber = parseFloat(elementText);
-        let showError = (errMsg) => errorElm.innerText = errMsg;
-        if (elementText === '')
-            showError(`Can't be empty`);
-        else if (elementTextAsANumber < 0)
-            showError('Should be greater than zero');
-        else if (elementTextAsANumber === 0)
-            showError(`Can\'t be zero`);
-        else if (elementText.includes('.'))
-            showError('Should be an integer');
-        else
-            showError('invalid input');
+        let showError = (condition, errMsg) => {
+            if (condition)
+                errorElm.innerText = errMsg;
+        };
+        showError(true, "invalid input"); // default
+        showError(elementText === "", `Can't be empty`);
+        showError(elementTextAsANumber < 0, "Should be greater than zero");
+        showError(elementTextAsANumber === 0, `Can\'t be zero`);
+        showError(elementText.includes("."), "Should be an integer");
     }
     /**
      * Shows the error message on the people input
-    */
+     */
     function showErrorMsg() {
         errorMsgs(dom_4.PEOPLE_INPUT.value, dom_4.ERROR);
-        dom_4.ERROR.style.display = 'block';
-        dom_4.ERROR?.classList.add('card__section__error--visible');
+        dom_4.ERROR.style.display = "block";
+        dom_4.ERROR?.classList.add("card__section__error--visible");
         setPeopleInputInvalid();
     }
     /**
      * Hides the error message on the people input
-    */
+     */
     function hideErrorMsg() {
-        dom_4.ERROR?.classList.remove('card__section__error--visible');
-        dom_4.ERROR.style.display = 'none';
+        dom_4.ERROR?.classList.remove("card__section__error--visible");
+        dom_4.ERROR.style.display = "none";
         setPeopleInputValid();
     }
     exports.hideErrorMsg = hideErrorMsg;
@@ -199,18 +204,18 @@ define("validation/validation", ["require", "exports", "dom", "calculation/calcu
      * So, that css :invalid pseudo-class will apply styles.
      */
     function setPeopleInputValid() {
-        dom_4.PEOPLE_INPUT?.setCustomValidity('');
+        dom_4.PEOPLE_INPUT?.setCustomValidity("");
     }
     /**
      * Sets the people input invalid.
      * So that the css :invalid pseudo class won't apply styles.
-    */
+     */
     function setPeopleInputInvalid() {
-        dom_4.PEOPLE_INPUT?.setCustomValidity('Please enter a number greater than 0');
+        dom_4.PEOPLE_INPUT?.setCustomValidity("Please enter a number greater than 0");
     }
     /**
      * Shows error message on people input's error element if the input is not valid.
-    */
+     */
     function showErrorMsgOnPeopleInput() {
         if (isPeopleInputValid())
             hideErrorMsg();
@@ -243,14 +248,15 @@ define("resetBtn", ["require", "exports", "dom", "inputsObj", "validation/valida
      * Disable reset button if the input values are invalid
      */
     function disableResetBtn() {
+        const btnDisableDelay = 200;
         setTimeout(() => {
-            const isInputsAreInvalid = !validation_3.isBillAmountValid() || !validation_3.isTipAmountValid() || !validation_3.isPeopleInputValid();
-            DOM.RESET_BTN.disabled = isInputsAreInvalid;
-            if (isInputsAreInvalid)
+            const areInputsInvalid = !validation_3.isBillAmountValid() || !validation_3.isTipAmountValid() || !validation_3.isPeopleInputValid();
+            DOM.RESET_BTN.disabled = areInputsInvalid;
+            if (areInputsInvalid)
                 DOM.RESET_BTN?.classList.add('card__section__reset-btn--disabled');
             else
                 DOM.RESET_BTN?.classList.remove('card__section__reset-btn--disabled');
-        }, 200); // to give btn disabling and style changes a bit delay
+        }, btnDisableDelay); // to give btn disabling and style changes a bit delay
     }
     exports.disableResetBtn = disableResetBtn;
 });
@@ -285,6 +291,8 @@ define("index", ["require", "exports", "dom", "inputsObj", "resetBtn", "utils/ut
     // Event listeners
     DOM.PEOPLE_INPUT?.addEventListener('input', (event) => {
         updatePeople();
+        calculateTip_3.showTipPerPerson();
+        calculateTotalBill_2.showTotalBillPerPerson();
         validation_4.showErrorMsgOnPeopleInput(); // to show error if invalid
         resetBtn_1.disableResetBtn();
     });
@@ -300,14 +308,15 @@ define("index", ["require", "exports", "dom", "inputsObj", "resetBtn", "utils/ut
     DOM.BILL_INPUT?.addEventListener('input', () => {
         updateBill();
         resetBtn_1.disableResetBtn();
+        updatePeople();
+        calculateTip_3.showTipPerPerson();
+        calculateTotalBill_2.showTotalBillPerPerson();
     });
     DOM.BILL_INPUT?.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            updatePeople();
-            calculateTip_3.showTipPerPerson();
-            calculateTotalBill_2.showTotalBillPerPerson();
-            resetBtn_1.disableResetBtn();
-        }
+        updatePeople();
+        calculateTip_3.showTipPerPerson();
+        calculateTotalBill_2.showTotalBillPerPerson();
+        resetBtn_1.disableResetBtn();
     });
     DOM.TIP_PERCENT_BTNS?.forEach((percentBtn) => {
         percentBtn.addEventListener('click', (event) => {
@@ -319,7 +328,7 @@ define("index", ["require", "exports", "dom", "inputsObj", "resetBtn", "utils/ut
             resetBtn_1.disableResetBtn();
         });
     });
-    DOM.CUSTOM_TIP_PERCENT_INPUT?.addEventListener('input', (event) => {
+    DOM.CUSTOM_TIP_PERCENT_INPUT?.addEventListener('input', () => {
         updateCustomTipPercent();
         utils_4.removeBtnActive(DOM.TIP_PERCENT_BTNS);
         resetBtn_1.disableResetBtn();
