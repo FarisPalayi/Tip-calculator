@@ -1,7 +1,7 @@
 import { TIP_AMT } from '../dom'
 import inputsObj from "../inputsObj";
 import { prependDollarSign } from "../utils/utils";
-import { isTipAmountValid } from '../validation/validation';
+import { isBillAmountValid, isPeopleInputValid, isTipAmountValid } from '../validation/validation';
 
 // TODO: handle rounding errors
 
@@ -22,11 +22,11 @@ function calculateTipPerPerson(): number {
 }
 
 /**
- * Shows the tip per person value (in dollars) if bill input value is valid
+ * Shows the tip per person value (in dollars) if input values are valid
  * - Checks validity by using the {@link isTipAmountValid} function
 */
 function showTipPerPerson(): void {
-  if (isTipAmountValid())
+  if (isTipAmountValid() && isBillAmountValid() && isPeopleInputValid())
     TIP_AMT!.innerText = prependDollarSign(calculateTipPerPerson());
   else
     TIP_AMT!.innerText = prependDollarSign(0);

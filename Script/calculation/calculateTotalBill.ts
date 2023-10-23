@@ -1,7 +1,7 @@
 import { TOTAL_BILL_AMT } from '../dom'
 import inputsObj from "../inputsObj";
 import { prependDollarSign } from '../utils/utils';
-import { isBillAmountValid } from '../validation/validation';
+import { isBillAmountValid, isPeopleInputValid, isTipAmountValid } from '../validation/validation';
 import { calculateTip } from "./calculateTip";
 
 
@@ -22,11 +22,11 @@ function calculateTotalBillPerPerson(): number {
 }
 
 /**
- * Shows the bill per person value (in dollars) if bill input value is valid
+ * Shows the bill per person value (in dollars) if inputs are valid
  * - Checks validity by using the {@link isBillAmountValid} function
 */
 function showTotalBillPerPerson(): void {
-  if (isBillAmountValid())
+  if (isBillAmountValid() && isTipAmountValid() && isPeopleInputValid())
     TOTAL_BILL_AMT!.innerHTML = prependDollarSign(calculateTotalBillPerPerson());
   else
     TOTAL_BILL_AMT!.innerText =  prependDollarSign(0);
