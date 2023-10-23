@@ -22,11 +22,11 @@ disableResetBtn();
 // update values
 
 function updatePeople(): void {
-  inputsObj.noOfPeople = parseInt(DOM.PEOPLE_INPUT!.value) || 0;
+  inputsObj.noOfPeople = parseInt(DOM.PEOPLE_INPUT!.value) || 0
 }
 
 function updateBill(): void {
-  inputsObj.bill = parseFloat(DOM.BILL_INPUT!.value) || 0;
+  inputsObj.bill = parseFloat(DOM.BILL_INPUT!.value) || 0
 }
 
 function updateTipPercent(event: Event): void {
@@ -44,6 +44,8 @@ function updateCustomTipPercent(): void {
 
 DOM.PEOPLE_INPUT?.addEventListener('input', (event: Event): void => {
   updatePeople();
+  showTipPerPerson();
+  showTotalBillPerPerson();
   showErrorMsgOnPeopleInput(); // to show error if invalid
   disableResetBtn();
 })
@@ -62,15 +64,17 @@ DOM.PEOPLE_INPUT?.addEventListener('keydown', (event: KeyboardEvent): void => {
 DOM.BILL_INPUT?.addEventListener('input', (): void => {
   updateBill();
   disableResetBtn();
+  
+  updatePeople();
+  showTipPerPerson();
+  showTotalBillPerPerson();
 })
 
 DOM.BILL_INPUT?.addEventListener('keydown', (event: KeyboardEvent): void => {
-  if (event.key === 'Enter') {
-    updatePeople();
-    showTipPerPerson();
-    showTotalBillPerPerson();
-    disableResetBtn();
-  }
+  updatePeople();
+  showTipPerPerson();
+  showTotalBillPerPerson();
+  disableResetBtn();
 });
 
 
@@ -85,7 +89,7 @@ DOM.TIP_PERCENT_BTNS?.forEach((percentBtn: HTMLButtonElement): void => {
   });
 });
 
-DOM.CUSTOM_TIP_PERCENT_INPUT?.addEventListener('input', (event: Event): void => {
+DOM.CUSTOM_TIP_PERCENT_INPUT?.addEventListener('input', (): void => {
   updateCustomTipPercent();
   removeBtnActive(DOM.TIP_PERCENT_BTNS!);
   disableResetBtn();
